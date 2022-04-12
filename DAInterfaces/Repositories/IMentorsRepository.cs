@@ -14,21 +14,21 @@ public interface IMentorsRepository
     /// <param name="offset">Count of items to skip.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of mentors.</returns>
-    Task<PagedModel<MentorDto>> Get(int offset, int limit);
+    Task<PagedModel<MentorDto>> GetAsync(int offset, int limit);
 
     /// <summary>
     /// Gets mentor by id.
     /// </summary>
     /// <param name="id">Mentor's id.</param>
     /// <returns>Mentor with specified id.</returns>
-    Task<MentorDto> GetById(int id);
+    Task<MentorDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new mentor.
     /// </summary>
     /// <param name="mentorDto">New mentor.</param>
     /// <returns>Id of the added mentor.</returns>
-    Task<int> Add(MentorDto mentorDto);
+    Task<int> AddAsync(MentorDto mentorDto);
 
     /// <summary>
     /// Updates mentor's info.
@@ -36,12 +36,12 @@ public interface IMentorsRepository
     /// <param name="mentorId">Mentor's id.</param>
     /// <param name="mentorDto">New values.</param>
     /// <returns>True, if mentor's information was updated, otherwise, false.</returns>
-    Task<bool> Update(int mentorId, MentorDto mentorDto);
+    Task<bool> UpdateAsync(int mentorId, MentorDto mentorDto);
 
     /// <summary>
     /// Removes mentor.
     /// </summary>
     /// <param name="mentorId">Mentor's id.</param>
     /// <returns>True, if the mentor was deleted, otherwise, false.</returns>
-    Task<bool> Delete(int mentorId);
+    Task<bool> DeleteAsync(int mentorId);
 }
