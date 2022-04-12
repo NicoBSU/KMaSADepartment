@@ -14,21 +14,21 @@ public interface ISubjectsRepository
     /// <param name="offset">Count of items to skip.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of subjects.</returns>
-    Task<PagedModel<SubjectDto>> Get(int offset, int limit);
+    Task<PagedModel<SubjectDto>> GetAsync(int offset, int limit);
 
     /// <summary>
     /// Gets subject by id.
     /// </summary>
     /// <param name="id">Subject's id.</param>
     /// <returns>Subject with specified id.</returns>
-    Task<SubjectDto> GetById(int id);
+    Task<SubjectDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new subject.
     /// </summary>
     /// <param name="subjectDto">New subject.</param>
     /// <returns>Id of created subject.</returns>
-    Task<int> Add(SubjectDto subjectDto);
+    Task<int> AddAsync(SubjectDto subjectDto);
 
     /// <summary>
     /// Updates subject.
@@ -36,12 +36,12 @@ public interface ISubjectsRepository
     /// <param name="subjectId">Id of the subject.</param>
     /// <param name="subjectDto">New values.</param>
     /// <returns>True, if subject was updated, otherwise, false.</returns>
-    Task<bool> Update(int subjectId, SubjectDto subjectDto);
+    Task<bool> UpdateAsync(int subjectId, SubjectDto subjectDto);
 
     /// <summary>
     /// Removes subject.
     /// </summary>
     /// <param name="subjectId">Id of the subject.</param>
     /// <returns>True, if subject was deleted, otherwise, false.</returns>
-    Task<bool> Delete(int subjectId);
+    Task<bool> DeleteAsync(int subjectId);
 }

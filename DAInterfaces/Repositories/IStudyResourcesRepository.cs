@@ -14,7 +14,7 @@ public interface IStudyResourcesRepository
     /// <param name="offset">Count of items to skip.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> Get(int offset, int limit);
+    Task<PagedModel<StudyResourceDto>> GetAsync(int offset, int limit);
 
     /// <summary>
     /// Gets study resources with specified count by author.
@@ -23,7 +23,7 @@ public interface IStudyResourcesRepository
     /// <param name="offset">Count of items to skip.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> GetByMentor(int mentorId, int offset, int limit);
+    Task<PagedModel<StudyResourceDto>> GetByMentorAsync(int mentorId, int offset, int limit);
 
     /// <summary>
     /// Gets study resources with specified count by subject.
@@ -32,21 +32,21 @@ public interface IStudyResourcesRepository
     /// <param name="offset">Count of items to skip.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> GetBySubject(int subjectId, int offset, int limit);
+    Task<PagedModel<StudyResourceDto>> GetBySubjectAsync(int subjectId, int offset, int limit);
 
     /// <summary>
     /// Gets study resource by id.
     /// </summary>
     /// <param name="id">Study resource id.</param>
     /// <returns>Study resource with specified id.</returns>
-    Task<StudyResourceDto> GetById(int id);
+    Task<StudyResourceDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new study resource.
     /// </summary>
     /// <param name="studyResourceDto">New study resource.</param>
     /// <returns>Id of the added study resource.</returns>
-    Task<int> Add(StudyResourceDto studyResourceDto);
+    Task<int> AddAsync(StudyResourceDto studyResourceDto);
 
     /// <summary>
     /// Updates study resource.
@@ -54,12 +54,12 @@ public interface IStudyResourcesRepository
     /// <param name="studyResourceId">Study resource id.</param>
     /// <param name="studyResourceDto">New values.</param>
     /// <returns>True, if study resource was updated, otherwise, false.</returns>
-    Task<bool> Update(int studyResourceId, StudyResourceDto studyResourceDto);
+    Task<bool> UpdateAsync(int studyResourceId, StudyResourceDto studyResourceDto);
 
     /// <summary>
     /// Removes study resource.
     /// </summary>
     /// <param name="studyResourceId">Study resource id.</param>
     /// <returns>True, if the study resource was deleted, otherwise, false.</returns>
-    Task<bool> Delete(int studyResourceId);
+    Task<bool> DeleteAsync(int studyResourceId);
 }
