@@ -11,19 +11,19 @@ public interface IStudentsRepository
     /// <summary>
     /// Gets students with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<StudentDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<StudentDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets students of the certain course.
     /// </summary>
     /// <param name="course">Course.</param>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<StudentDto>> GetByCourseAsync(CourseDto course, int offset, int limit);
+    Task<PagedModel<StudentDto>> GetByCourseAsync(CourseDto course, int page, int limit);
 
     /// <summary>
     /// Gets student by id.

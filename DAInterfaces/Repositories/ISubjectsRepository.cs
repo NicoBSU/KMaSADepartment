@@ -11,10 +11,10 @@ public interface ISubjectsRepository
     /// <summary>
     /// Gets subjects with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of subjects.</returns>
-    Task<PagedModel<SubjectDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<SubjectDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets subject by id.

@@ -11,10 +11,10 @@ public interface IBlogArticlesRepository
     /// <summary>
     /// Gets items with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of blog articles.</returns>
-    Task<PagedModel<BlogArticleDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<BlogArticleDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets article by id.
