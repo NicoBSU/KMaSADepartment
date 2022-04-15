@@ -66,6 +66,14 @@ public interface ICourseWorksRepository
     Task<bool> UpdateAsync(int courseWorkId, CourseWorkDto courseWorkDto);
 
     /// <summary>
+    /// Updates course work status.
+    /// </summary>
+    /// <param name="courseWorkId">Id of the course work.</param>
+    /// <param name="courseWorkStatusDto">New status.</param>
+    /// <returns>True, if course work status was updated, otherwise, false.</returns>
+    Task<bool> UpdateStatusAsync(int courseWorkId, CourseWorkStatusDto courseWorkStatusDto);
+
+    /// <summary>
     /// Removes course work.
     /// </summary>
     /// <param name="courseWorkId">Id of the course work.</param>

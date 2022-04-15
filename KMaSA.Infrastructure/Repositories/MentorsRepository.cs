@@ -39,9 +39,6 @@ public class MentorsRepository : IMentorsRepository
         }
 
         var entityPagedModel = await this.dbContext.Mentors
-            .Include(m => m.Publications)
-            .Include(m => m.CourseWorks)
-            .Include(m => m.Subjects)
             .PaginateAsync(page, limit, new CancellationToken());
 
         return new PagedModel<MentorDto>
@@ -63,7 +60,12 @@ public class MentorsRepository : IMentorsRepository
             throw new ArgumentOutOfRangeException(nameof(id), "Mentor identifier must be positive.");
         }
 
-        var entity = await this.dbContext.Mentors.SingleOrDefaultAsync(m => m.Id == id);
+        var entity = await this.dbContext.Mentors
+            .Include(m => m.Publications)
+            .Include(m => m.CourseWorks)
+            .ThenInclude(cw => cw.Status)
+            .Include(m => m.Subjects)
+            .SingleOrDefaultAsync(m => m.Id == id);
 
         return this.autoMapper.Map<MentorDto>(entity);
     }
