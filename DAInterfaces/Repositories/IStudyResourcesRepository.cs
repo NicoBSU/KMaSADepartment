@@ -62,4 +62,12 @@ public interface IStudyResourcesRepository
     /// <param name="studyResourceId">Study resource id.</param>
     /// <returns>True, if the study resource was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int studyResourceId);
+
+    /// <summary>
+    /// Removes author.
+    /// </summary>
+    /// <param name="studyResourceId">Study resource id.</param>
+    /// <param name="authorId">Resource author.</param>
+    /// <returns>True, if the resource author was removed, otherwise, false.</returns>
+    Task<bool> RemoveAuthor(int studyResourceId, int authorId);
 }
