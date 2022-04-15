@@ -29,6 +29,8 @@ public class StudentsRepository : IStudentsRepository
         this.autoMapper = autoMapper ?? throw new ArgumentNullException(nameof(autoMapper));
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
     public async Task<PagedModel<StudentDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
@@ -50,6 +52,8 @@ public class StudentsRepository : IStudentsRepository
         };
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
     public async Task<PagedModel<StudentDto>> GetByCourseAsync(CourseDto course, int page, int limit)
     {
         if (limit < 0)
@@ -74,6 +78,8 @@ public class StudentsRepository : IStudentsRepository
         };
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
     public async Task<StudentDto> GetByIdAsync(int id)
     {
         if (id < 1)
@@ -91,6 +97,8 @@ public class StudentsRepository : IStudentsRepository
         return this.autoMapper.Map<StudentDto>(entity);
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     public async Task<int> AddAsync(StudentDto studentDto)
     {
         if (studentDto is null)
@@ -105,6 +113,9 @@ public class StudentsRepository : IStudentsRepository
         return entity.Id;
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
     public async Task<bool> UpdateAsync(int studentId, StudentDto studentDto)
     {
         if (studentId < 1)
@@ -131,6 +142,8 @@ public class StudentsRepository : IStudentsRepository
         return true;
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
     public async Task<bool> DeleteAsync(int studentId)
     {
         if (studentId < 1)
