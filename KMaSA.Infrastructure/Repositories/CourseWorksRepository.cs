@@ -172,7 +172,8 @@ public class CourseWorksRepository : ICourseWorksRepository
         await this.dbContext.CourseWorks.AddAsync(entity);
         await this.dbContext.SaveChangesAsync();
 
-        return entity.Id; }
+        return entity.Id;
+    }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
@@ -197,7 +198,7 @@ public class CourseWorksRepository : ICourseWorksRepository
             return false;
         }
 
-        entity.Title = entity.Title;
+        entity.Title = courseWorkDto.Title;
         await this.dbContext.SaveChangesAsync();
 
         return true;

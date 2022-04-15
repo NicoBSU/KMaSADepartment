@@ -31,6 +31,14 @@ public interface ISubjectsRepository
     Task<int> AddAsync(SubjectDto subjectDto);
 
     /// <summary>
+    /// Adds mentor for subject.
+    /// </summary>
+    /// <param name="subjectId">Id of the subject.</param>
+    /// <param name="mentorId">Id of the mentor.</param>
+    /// <returns>True, if mentor was added, otherwise, false.</returns>
+    Task<bool> AddMentor(int subjectId, int mentorId);
+
+    /// <summary>
     /// Updates subject.
     /// </summary>
     /// <param name="subjectId">Id of the subject.</param>
@@ -44,4 +52,20 @@ public interface ISubjectsRepository
     /// <param name="subjectId">Id of the subject.</param>
     /// <returns>True, if subject was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int subjectId);
+
+    /// <summary>
+    /// Removes recommended study resource for subject.
+    /// </summary>
+    /// <param name="subjectId">Id of the subject.</param>
+    /// <param name="studyResourceId">Id of the recommended resource.</param>
+    /// <returns>True, if study resource was deleted, otherwise, false.</returns>
+    Task<bool> RemoveRecommendedStudyResource(int subjectId, int studyResourceId);
+
+    /// <summary>
+    /// Removes mentor for subject.
+    /// </summary>
+    /// <param name="subjectId">Id of the subject.</param>
+    /// <param name="mentorId">Id of the mentor.</param>
+    /// <returns>True, if mentor was deleted, otherwise, false.</returns>
+    Task<bool> RemoveMentor(int subjectId, int mentorId);
 }
