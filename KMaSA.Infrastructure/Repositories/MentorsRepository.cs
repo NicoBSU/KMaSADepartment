@@ -38,7 +38,11 @@ public class MentorsRepository : IMentorsRepository
             throw new ArgumentOutOfRangeException(nameof(limit), "Count of mentors must be non-negative.");
         }
 
-        var entityPagedModel = await this.dbContext.Mentors.PaginateAsync(page, limit, new CancellationToken());
+        var entityPagedModel = await this.dbContext.Mentors
+            .Include(m => m.Publications)
+            .Include(m => m.CourseWorks)
+            .Include(m => m.Subjects)
+            .PaginateAsync(page, limit, new CancellationToken());
 
         return new PagedModel<MentorDto>
         {
