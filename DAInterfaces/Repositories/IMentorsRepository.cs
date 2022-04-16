@@ -44,4 +44,12 @@ public interface IMentorsRepository
     /// <param name="mentorId">Mentor's id.</param>
     /// <returns>True, if the mentor was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int mentorId);
+
+    /// <summary>
+    /// Updates mentor's avatar.
+    /// </summary>
+    /// <param name="mentorId">Id of the mentor</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int mentorId, string pictureLink);
 }

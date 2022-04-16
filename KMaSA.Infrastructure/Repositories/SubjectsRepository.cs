@@ -216,4 +216,34 @@ public class SubjectsRepository : ISubjectsRepository
 
         return true;
     }
+
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the subject's id is less than zero.</exception>
+    /// <exception cref="ArgumentException">Throws, picture link is null or empty or whitespace.</exception>
+    public async Task<bool> UpdatePicture(int subjectId, string pictureLink)
+    {
+        if (subjectId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(subjectId), "Subject's identifier must be positive.");
+        }
+
+        if (string.IsNullOrWhiteSpace(pictureLink))
+        {
+            throw new ArgumentException("Picture link is null or empty or whitespace.");
+        }
+
+        var entity = await this.dbContext.Subjects
+            .SingleOrDefaultAsync(s => s.Id == subjectId);
+
+        if (entity is null)
+        {
+            return false;
+        }
+
+        entity.PictureLink = pictureLink;
+
+        await this.dbContext.SaveChangesAsync();
+
+        return true;
+    }
 }

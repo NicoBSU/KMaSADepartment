@@ -137,6 +137,36 @@ public class MentorsRepository : IMentorsRepository
         return true;
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the mentor's id is less than zero.</exception>
+    /// <exception cref="ArgumentException">Throws, picture link is null or empty or whitespace.</exception>
+    public async Task<bool> UpdatePicture(int mentorId, string pictureLink)
+    {
+        if (mentorId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(mentorId), "Mentor's identifier must be positive.");
+        }
+
+        if (string.IsNullOrWhiteSpace(pictureLink))
+        {
+            throw new ArgumentException("Picture link is null or empty or whitespace.");
+        }
+
+        var entity = await this.dbContext.Mentors
+            .SingleOrDefaultAsync(m => m.Id == mentorId);
+
+        if (entity is null)
+        {
+            return false;
+        }
+
+        entity.PictureLink = pictureLink;
+
+        await this.dbContext.SaveChangesAsync();
+
+        return true;
+    }
+
     private static void Update(MentorEntity entity, MentorDto dto)
     {
         entity.FirstName = dto.FirstName;
@@ -146,6 +176,5 @@ public class MentorsRepository : IMentorsRepository
         entity.Email = dto.Email;
         entity.Title = dto.Title;
         entity.BirthDate = dto.BirthDate;
-        entity.PictureLink = dto.PictureLink;
     }
 }

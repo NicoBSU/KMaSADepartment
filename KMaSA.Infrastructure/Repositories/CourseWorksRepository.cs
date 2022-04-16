@@ -250,4 +250,61 @@ public class CourseWorksRepository : ICourseWorksRepository
 
         return true;
     }
+
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Throws, if the course work's id is less than or equals zero
+    /// or student's id is less than or equals zero.
+    /// </exception>
+    public async Task<bool> BindStudent(int studentId, int courseWorkId)
+    {
+        if (courseWorkId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(courseWorkId), "Course work's identifier must be positive.");
+        }
+
+        if (studentId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(courseWorkId), "Student's identifier must be positive.");
+        }
+
+        var student = await this.dbContext.Students.SingleOrDefaultAsync(s => s.Id == studentId);
+        var courseWork = await this.dbContext.CourseWorks.SingleOrDefaultAsync(cw => cw.Id == courseWorkId);
+
+        if (student is null || courseWork is null)
+        {
+            return false;
+        }
+
+        courseWork.Student = student;
+        courseWork.Status = CourseWorkStatusEntity.Approved;
+
+        await this.dbContext.SaveChangesAsync();
+
+        return true;
+    }
+
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the course work's id is less than zero.</exception>
+    public async Task<bool> UnbindStudent(int courseWorkId)
+    {
+        if (courseWorkId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(courseWorkId), "Course work's identifier must be positive.");
+        }
+
+        var courseWork = await this.dbContext.CourseWorks.SingleOrDefaultAsync(cw => cw.Id == courseWorkId);
+
+        if (courseWork is null)
+        {
+            return false;
+        }
+
+        courseWork.Student = null;
+        courseWork.Status = CourseWorkStatusEntity.Free;
+
+        await this.dbContext.SaveChangesAsync();
+
+        return true;
+    }
 }

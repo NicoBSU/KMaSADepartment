@@ -79,4 +79,19 @@ public interface ICourseWorksRepository
     /// <param name="courseWorkId">Id of the course work.</param>
     /// <returns>True, if course work was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int courseWorkId);
+
+    /// <summary>
+    /// Gives course work to student.
+    /// </summary>
+    /// <param name="studentId">Student's id.</param>
+    /// <param name="courseWorkId">Course work's id.</param>
+    /// <returns>True,if the student was added, otherwise, false.</returns>
+    Task<bool> BindStudent(int studentId, int courseWorkId);
+
+    /// <summary>
+    /// Makes course work available to take.
+    /// </summary>
+    /// <param name="courseWorkId">Course work's id.</param>
+    /// <returns>True,if the student was unbind, otherwise, false.</returns>
+    Task<bool> UnbindStudent(int courseWorkId);
 }

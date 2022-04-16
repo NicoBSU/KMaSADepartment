@@ -68,4 +68,12 @@ public interface ISubjectsRepository
     /// <param name="mentorId">Id of the mentor.</param>
     /// <returns>True, if mentor was deleted, otherwise, false.</returns>
     Task<bool> RemoveMentor(int subjectId, int mentorId);
+
+    /// <summary>
+    /// Updates subject's picture.
+    /// </summary>
+    /// <param name="subjectId">Id of the subject</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int subjectId, string pictureLink);
 }

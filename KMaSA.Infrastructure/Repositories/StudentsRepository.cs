@@ -164,6 +164,36 @@ public class StudentsRepository : IStudentsRepository
         return true;
     }
 
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
+    /// <exception cref="ArgumentException">Throws, picture link is null or empty or whitespace.</exception>
+    public async Task<bool> UpdatePicture(int studentId, string pictureLink)
+    {
+        if (studentId < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(studentId), "Student's identifier must be positive.");
+        }
+
+        if (string.IsNullOrWhiteSpace(pictureLink))
+        {
+            throw new ArgumentException("Picture link is null or empty or whitespace.");
+        }
+
+        var entity = await this.dbContext.Students
+            .SingleOrDefaultAsync(s => s.Id == studentId);
+
+        if (entity is null)
+        {
+            return false;
+        }
+
+        entity.PictureLink = pictureLink;
+
+        await this.dbContext.SaveChangesAsync();
+
+        return true;
+    }
+
     private static void Update(StudentEntity entity, StudentDto studentDto)
     {
         entity.FirstName = studentDto.FirstName;
@@ -171,6 +201,5 @@ public class StudentsRepository : IStudentsRepository
         entity.MiddleName = studentDto.MiddleName;
         entity.Email = studentDto.Email;
         entity.Rating = studentDto.Rating;
-        entity.PictureLink = studentDto.PictureLink;
     }
 }
