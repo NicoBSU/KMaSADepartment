@@ -44,4 +44,12 @@ public interface IBlogArticlesRepository
     /// <param name="blogArticleId">Id of the article.</param>
     /// <returns>True, if article was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int blogArticleId);
+
+    /// <summary>
+    /// Updates article picture.
+    /// </summary>
+    /// <param name="blogArticleId">Id of the article</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int blogArticleId, string pictureLink);
 }
