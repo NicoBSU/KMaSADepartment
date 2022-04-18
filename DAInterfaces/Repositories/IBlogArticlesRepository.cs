@@ -11,10 +11,10 @@ public interface IBlogArticlesRepository
     /// <summary>
     /// Gets items with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of blog articles.</returns>
-    Task<PagedModel<BlogArticleDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<BlogArticleDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets article by id.
@@ -44,4 +44,12 @@ public interface IBlogArticlesRepository
     /// <param name="blogArticleId">Id of the article.</param>
     /// <returns>True, if article was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int blogArticleId);
+
+    /// <summary>
+    /// Updates article picture.
+    /// </summary>
+    /// <param name="blogArticleId">Id of the article</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int blogArticleId, string pictureLink);
 }

@@ -11,19 +11,19 @@ public interface IStudentsRepository
     /// <summary>
     /// Gets students with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<StudentDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<StudentDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets students of the certain course.
     /// </summary>
     /// <param name="course">Course.</param>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<StudentDto>> GetByCourseAsync(CourseDto course, int offset, int limit);
+    Task<PagedModel<StudentDto>> GetByCourseAsync(CourseDto course, int page, int limit);
 
     /// <summary>
     /// Gets student by id.
@@ -53,4 +53,12 @@ public interface IStudentsRepository
     /// <param name="studentId">Student's id.</param>
     /// <returns>True, if the student was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int studentId);
+
+    /// <summary>
+    /// Updates student's avatar.
+    /// </summary>
+    /// <param name="studentId">Id of the student</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int studentId, string pictureLink);
 }
