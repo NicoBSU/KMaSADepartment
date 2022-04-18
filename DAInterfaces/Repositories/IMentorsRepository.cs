@@ -11,10 +11,10 @@ public interface IMentorsRepository
     /// <summary>
     /// Gets mentors with specified count.
     /// </summary>
-    /// <param name="offset">Count of items to skip.</param>
+    /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of mentors.</returns>
-    Task<PagedModel<MentorDto>> GetAsync(int offset, int limit);
+    Task<PagedModel<MentorDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets mentor by id.
@@ -44,4 +44,12 @@ public interface IMentorsRepository
     /// <param name="mentorId">Mentor's id.</param>
     /// <returns>True, if the mentor was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int mentorId);
+
+    /// <summary>
+    /// Updates mentor's avatar.
+    /// </summary>
+    /// <param name="mentorId">Id of the mentor</param>
+    /// <param name="pictureLink">Link to picture storage.</param>
+    /// <returns>True, if the link was updated, otherwise, false</returns>
+    Task<bool> UpdatePicture(int mentorId, string pictureLink);
 }
