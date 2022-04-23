@@ -101,6 +101,7 @@ public class KmasaContext : DbContext
         modelBuilder.Entity<StudentEntity>()
             .HasOne(s => s.CourseWork)
             .WithOne(cw => cw.Student)
+            .HasForeignKey<CourseWorkEntity>(s => s.StudentId)
             .OnDelete(DeleteBehavior.SetNull);
         modelBuilder.Entity<SubjectEntity>()
             .HasMany(s => s.Mentors)
