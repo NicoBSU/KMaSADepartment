@@ -1,4 +1,5 @@
 ﻿using KMaSA.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace KMaSA.Infrastructure.EF;
@@ -6,7 +7,7 @@ namespace KMaSA.Infrastructure.EF;
 /// <summary>
 /// Represent department application database context.
 /// </summary>
-public class KmasaContext : DbContext
+public class KmasaContext : IdentityDbContext
 {
     /// <summary>
     /// Initializes new instance of <see cref="KmasaContext"/>.
