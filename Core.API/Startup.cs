@@ -1,9 +1,8 @@
-﻿using KMaSA.Infrastructure.EF;
-using Microsoft.EntityFrameworkCore;
-
-using MediatR;
-using Microsoft.AspNetCore.Identity;
+﻿using Core.API.Extensions;
+using KMaSA.Infrastructure.EF;
 using KMaSA.Models.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.API
 {
@@ -26,6 +25,7 @@ namespace Core.API
                 .AddEntityFrameworkStores<KmasaContext>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
+            services.AddIdentityServices(_config);
             services.AddSwaggerGen();
             services.AddCors();
             services.AddMediatR(typeof(Startup));
