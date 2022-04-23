@@ -1,5 +1,6 @@
 ﻿using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.Enums;
 
 namespace DAInterfaces.Repositories;
 
@@ -41,7 +42,7 @@ public interface ICourseWorksRepository
     /// <param name="limit">Count of items to take</param>
     /// <param name="status">Course work status.</param>
     /// <returns>Paged model with collection of blog articles.</returns>
-    Task<PagedModel<CourseWorkDto>> GetByStatusAsync(CourseWorkStatusDto status, int page, int limit);
+    Task<PagedModel<CourseWorkDto>> GetByStatusAsync(CourseWorkStatus status, int page, int limit);
 
     /// <summary>
     /// Gets course work by id.
@@ -71,7 +72,7 @@ public interface ICourseWorksRepository
     /// <param name="courseWorkId">Id of the course work.</param>
     /// <param name="courseWorkStatusDto">New status.</param>
     /// <returns>True, if course work status was updated, otherwise, false.</returns>
-    Task<bool> UpdateStatusAsync(int courseWorkId, CourseWorkStatusDto courseWorkStatusDto);
+    Task<bool> UpdateStatusAsync(int courseWorkId, CourseWorkStatus courseWorkStatusDto);
 
     /// <summary>
     /// Removes course work.

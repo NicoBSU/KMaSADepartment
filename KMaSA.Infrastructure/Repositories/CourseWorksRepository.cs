@@ -5,6 +5,7 @@ using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
+using KMaSA.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace KMaSA.Infrastructure.Repositories;
@@ -118,7 +119,7 @@ public class CourseWorksRepository : ICourseWorksRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<CourseWorkDto>> GetByStatusAsync(CourseWorkStatusDto status, int page, int limit)
+    public async Task<PagedModel<CourseWorkDto>> GetByStatusAsync(CourseWorkStatus status, int page, int limit)
     {
         if (limit < 0)
         {
@@ -128,7 +129,7 @@ public class CourseWorksRepository : ICourseWorksRepository
         var entityPagedModel = await this.dbContext.CourseWorks
             .Include(cw => cw.Status)
             .Include(cw => cw.Mentor)
-            .Where(cw => cw.Status == (CourseWorkStatusEntity)(int)status)
+            .Where(cw => cw.Status == (CourseWorkStatus)(int)status)
             .PaginateAsync(page, limit, new CancellationToken());
 
         return new PagedModel<CourseWorkDto>
@@ -206,7 +207,7 @@ public class CourseWorksRepository : ICourseWorksRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the course work's id is less than zero.</exception>
-    public async Task<bool> UpdateStatusAsync(int courseWorkId, CourseWorkStatusDto courseWorkStatusDto)
+    public async Task<bool> UpdateStatusAsync(int courseWorkId, CourseWorkStatus courseWorkStatusDto)
     {
         if (courseWorkId < 1)
         {
@@ -222,7 +223,7 @@ public class CourseWorksRepository : ICourseWorksRepository
             return false;
         }
 
-        entity.Status = (CourseWorkStatusEntity)(int)courseWorkStatusDto;
+        entity.Status = (CourseWorkStatus)(int)courseWorkStatusDto;
         await this.dbContext.SaveChangesAsync();
 
         return true;
@@ -277,7 +278,7 @@ public class CourseWorksRepository : ICourseWorksRepository
         }
 
         courseWork.Student = student;
-        courseWork.Status = CourseWorkStatusEntity.Approved;
+        courseWork.Status = CourseWorkStatus.Approved;
 
         await this.dbContext.SaveChangesAsync();
 
@@ -301,7 +302,7 @@ public class CourseWorksRepository : ICourseWorksRepository
         }
 
         courseWork.Student = null;
-        courseWork.Status = CourseWorkStatusEntity.Free;
+        courseWork.Status = CourseWorkStatus.Free;
 
         await this.dbContext.SaveChangesAsync();
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace Core.API
 {
@@ -19,6 +20,9 @@ namespace Core.API
         {
             services.AddDbContext<KmasaContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("KmasaDbConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<KmasaContext>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

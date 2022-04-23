@@ -45,6 +45,7 @@ public class KmasaContext : IdentityDbContext
     /// <param name="modelBuilder">Database model builder.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         this.ConfigureTableNames(modelBuilder);
         this.ConfigureConstraints(modelBuilder);
         this.BuildRelationShips(modelBuilder);

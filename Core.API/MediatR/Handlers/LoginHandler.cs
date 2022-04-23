@@ -7,8 +7,8 @@ namespace Core.API.MediatR.Handlers
 {
     public class LoginHandler : IRequestHandler<LoginQuery, UserCredentials>
     {
-        public 
-        
+        public
+
         public async Task<LoginCommand> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             return
