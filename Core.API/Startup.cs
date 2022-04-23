@@ -1,4 +1,6 @@
-﻿namespace Core.API
+﻿using MediatR;
+
+namespace Core.API
 {
     public class Startup
     {
@@ -16,6 +18,7 @@
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddCors();
+            services.AddMediatR(typeof(Startup));
             
         }
 

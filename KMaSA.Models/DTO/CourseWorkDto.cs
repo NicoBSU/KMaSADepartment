@@ -1,4 +1,6 @@
-﻿namespace KMaSA.Models.DTO;
+﻿using KMaSA.Models.Enums;
+
+namespace KMaSA.Models.DTO;
 
 public class CourseWorkDto : IDto
 {
@@ -6,7 +8,7 @@ public class CourseWorkDto : IDto
 
     public string Title { get; set; }
 
-    public CourseWorkStatusDto Status { get; set; }
+    public CourseWorkStatus Status { get; set; }
 
     public MentorDto Mentor { get; set; }
 

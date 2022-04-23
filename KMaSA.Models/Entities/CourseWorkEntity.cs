@@ -1,4 +1,6 @@
-﻿namespace KMaSA.Models.Entities;
+﻿using KMaSA.Models.Enums;
+
+namespace KMaSA.Models.Entities;
 
 public class CourseWorkEntity
 {
@@ -6,7 +8,7 @@ public class CourseWorkEntity
 
     public string Title { get; set; }
 
-    public CourseWorkStatusEntity Status { get; set; }
+    public CourseWorkStatus Status { get; set; }
 
     public MentorEntity Mentor { get; set; }
 
