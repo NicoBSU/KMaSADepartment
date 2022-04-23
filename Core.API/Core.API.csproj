@@ -17,12 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="MediatR\Commands\" />
-    <Folder Include="MediatR\Handlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\KMaSA.Models\KMaSA.Models.csproj" />
   </ItemGroup>
 
