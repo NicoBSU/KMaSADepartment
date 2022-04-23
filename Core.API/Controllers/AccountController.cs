@@ -1,6 +1,12 @@
-﻿using KMaSA.Models.DTO;
+﻿using AutoMapper;
+using BLInterfaces.Interfaces;
+using Core.API.MediatR.Query;
+using KMaSA.Models.DTO;
+using KMaSA.Models.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.API.Controllers
 {
@@ -8,25 +14,31 @@ namespace Core.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly SignInManager<UserEntity> _signInManager;
+        private readonly IMediator _mediator;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper)
+        public AccountController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager,
+            ITokenService tokenService, IMapper mapper, IMediator mediator)
         {
 
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _mediator = mediator;
         }
 
+        /// <summary>
+        /// Login a user
+        /// </summary>
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            return Ok();
+            var result = await _mediator.Send(new LoginQuery(loginDto.Login,loginDto.Password));
+            return Ok(result);
         }
 
         public IActionResult Register([FromBody] RegisterDto registerDto)
