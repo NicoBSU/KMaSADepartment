@@ -1,8 +1,9 @@
-﻿namespace KMaSA.Models.Entities
+﻿namespace KMaSA.Models.DTO
 {
-    public class UserCredentials
+    public class LoginDto
     {
         public string Login { get; set; }
+        
         public string Password { get; set; }
     }
 }

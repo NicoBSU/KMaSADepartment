@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Core.API.MediatR.Handlers
 {
-    public class LoginHandler : IRequestHandler<LoginQuery, UserCredentials>
+    public class LoginHandler : IRequestHandler<LoginQuery, LoginDto>
     {
         public
 

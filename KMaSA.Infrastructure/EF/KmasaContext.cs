@@ -1,4 +1,5 @@
 ﻿using KMaSA.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,8 @@ namespace KMaSA.Infrastructure.EF;
 /// <summary>
 /// Represent department application database context.
 /// </summary>
-public class KmasaContext : IdentityDbContext
+public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, IdentityUserClaim<int>,
+    UserRolesEntity,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
 {
     /// <summary>
     /// Initializes new instance of <see cref="KmasaContext"/>.
@@ -97,6 +99,17 @@ public class KmasaContext : IdentityDbContext
 
     private void BuildRelationShips(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<UserEntity>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.User)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
+        modelBuilder.Entity<RoleEntity>()
+            .HasMany(ur => ur.UserRoles)
+            .WithOne(u => u.Role)
+            .HasForeignKey(ur => ur.RoleId)
+            .IsRequired();
         modelBuilder.Entity<MentorEntity>()
             .HasMany(m => m.CourseWorks)
             .WithOne(cw => cw.Mentor);

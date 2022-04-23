@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using KMaSA.Models.Entities;
 
 namespace Core.API
 {
@@ -21,7 +22,7 @@ namespace Core.API
             services.AddDbContext<KmasaContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("KmasaDbConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<UserEntity, RoleEntity>()
                 .AddEntityFrameworkStores<KmasaContext>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();

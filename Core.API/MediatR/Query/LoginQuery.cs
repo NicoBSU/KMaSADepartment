@@ -1,9 +1,9 @@
-﻿using KMaSA.Models.Entities;
+﻿using KMaSA.Models.DTO;
 using MediatR;
 
 namespace Core.API.MediatR.Query
 {
-    public class LoginQuery : IRequest<UserCredentials>
+    public class LoginQuery : IRequest<LoginDto>
     {
         public string Password { get; }
         public string Login { get; }

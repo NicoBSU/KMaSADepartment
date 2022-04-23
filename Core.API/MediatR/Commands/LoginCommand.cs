@@ -1,12 +1,12 @@
-﻿using KMaSA.Models.Entities;
+﻿using KMaSA.Models.DTO;
 using MediatR;
 
 namespace Core.API.MediatR.Commands
 {
-    public class LoginCommand : IRequest<UserCredentials>
+    public class LoginCommand : IRequest<LoginDto>
     {
-        public UserCredentials UserCredentials { get; set; }
-        public LoginCommand(UserCredentials userCredentials)
+        public LoginDto UserCredentials { get; set; }
+        public LoginCommand(LoginDto userCredentials)
         {
             UserCredentials = userCredentials;
         }
