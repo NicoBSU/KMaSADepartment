@@ -6,6 +6,8 @@ public class CourseWorkEntity
 {
     public int Id { get; set; }
 
+    public int StudentId { get; set; }
+
     public string Title { get; set; }
 
     public CourseWorkStatus Status { get; set; }
