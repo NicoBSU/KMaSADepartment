@@ -641,7 +641,7 @@ namespace KMaSA.Infrastructure.Migrations
                     b.HasOne("KMaSA.Models.Entities.StudentEntity", "Student")
                         .WithOne("CourseWork")
                         .HasForeignKey("KMaSA.Models.Entities.CourseWorkEntity", "StudentId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_course_works_students_student_id");
 
