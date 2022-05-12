@@ -1,6 +1,9 @@
 ﻿using KMaSA.Infrastructure.EF;
 using KMaSA.Models.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Core.API.Extensions
 {
@@ -18,32 +21,38 @@ namespace Core.API.Extensions
                .AddRoleValidator<RoleValidator<RoleEntity>>()
                .AddEntityFrameworkStores<KmasaContext>();
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>{
-            //        options.TokenValidationParameters = new TokenValidationParameters{
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
-            //            ValidateIssuer = false,
-            //            ValidateAudience = false
-            //        };
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
 
-            //        options.Events = new JwtBearerEvents{
-            //            OnMessageReceived = context => {
-            //                var accessToken = context.Request.Query["access_token"];
-            //                var path = context.HttpContext.Request.Path;
-            //                if(!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs")){
-            //                    context.Token = accessToken;
-            //                }
-            //                return Task.CompletedTask;
-            //            }
-            //        };
-            //    }
-            //);
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken))
+                            {
+                                context.Token = accessToken;
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
 
-            //services.AddAuthorization(opt => {
-            //    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-            //    opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin","Moderator"));
-            //});
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+            });
 
             return services;
         }

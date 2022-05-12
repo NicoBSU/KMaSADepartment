@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-preview.2.22153.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.2.22153.1">
       <PrivateAssets>all</PrivateAssets>
@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLInterfaces\BLInterfaces.csproj" />
+    <ProjectReference Include="..\KMaSA.BusinessLogic\KMaSA.BusinessLogic.csproj" />
     <ProjectReference Include="..\KMaSA.Infrastructure\KMaSA.Infrastructure.csproj" />
     <ProjectReference Include="..\KMaSA.Models\KMaSA.Models.csproj" />
   </ItemGroup>

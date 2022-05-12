@@ -1,6 +1,6 @@
 ﻿namespace KMaSA.Models.Entities;
 
-public class StudentEntity
+public class StudentEntity : UserEntity
 {
     public int Id { get; set; }
 

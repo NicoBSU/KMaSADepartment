@@ -1,8 +1,15 @@
-﻿using Core.API.Extensions;
+﻿using BLInterfaces.Interfaces;
+using Core.API.Extensions;
+using Core.API.Infrastructure;
+using KMaSA.BusinessLogic.Services;
 using KMaSA.Infrastructure.EF;
 using KMaSA.Models.Entities;
-using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Core.API
 {
@@ -21,15 +28,15 @@ namespace Core.API
             services.AddDbContext<KmasaContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("KmasaDbConnection")));
 
-            services.AddIdentity<UserEntity, RoleEntity>()
-                .AddEntityFrameworkStores<KmasaContext>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddIdentityServices(_config);
             services.AddSwaggerGen();
             services.AddCors();
-            services.AddMediatR(typeof(Startup));
-            
+
+            services.AddAutoMapper(typeof(KmasaMappingProfile).Assembly);
+            services.AddScoped<ITokenService, TokenService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
