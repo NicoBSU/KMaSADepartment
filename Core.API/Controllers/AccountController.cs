@@ -34,10 +34,10 @@ namespace Core.API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
 
-            if (await UserExists(registerDto.Login)) return BadRequest("Username is taken!");
+            if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
 
             var user = _mapper.Map<UserEntity>(registerDto);
-            user.UserName = registerDto.Login.ToLower();
+            user.UserName = registerDto.UserName.ToLower();
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
@@ -62,7 +62,7 @@ namespace Core.API.Controllers
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.Users
-                .SingleOrDefaultAsync(x => x.UserName == loginDto.Login.ToLower());
+                .SingleOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
 
             if (user == null) return Unauthorized("Invalid username");
             var result = await _signInManager
