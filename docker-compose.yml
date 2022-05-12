@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+    kmasasqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "kmas@Database"
+            MSSQL_PID: Express
+        ports:
+            - "1433:1433"
+    
+    kmasabackend:
+        build: .
+        depends_on:
+            - kmasasqlserver
+        environment:
+            ServerName: "kmasasqlserver"
+            Database: "kmasaDatabase"
+            UserName: "SA"
+            Password: "kmas@Database"
+        ports:
+            - "5000:5000"
