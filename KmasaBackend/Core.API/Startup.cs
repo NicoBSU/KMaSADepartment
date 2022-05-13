@@ -26,7 +26,7 @@ namespace Core.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<KmasaContext>(
-                options => options.UseSqlServer(_config.GetConnectionString("KmasaDbConnection")));
+                options => options.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

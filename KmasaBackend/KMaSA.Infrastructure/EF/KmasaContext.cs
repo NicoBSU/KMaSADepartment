@@ -15,7 +15,7 @@ public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, Ident
     /// Initializes new instance of <see cref="KmasaContext"/>.
     /// </summary>
     /// <param name="options">Db context creation options.</param>
-    public KmasaContext(DbContextOptions<KmasaContext> options)
+    public KmasaContext(DbContextOptions options)
         : base(options)
     {
     }
