@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
     kmasasqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
@@ -8,15 +9,12 @@ services:
             MSSQL_PID: Express
         ports:
             - "1433:1433"
-    
-    kmasabackend:
-        build: .
+    core.api:
+        build:
+            context: .
+            dockerfile: Core.API/Dockerfile    
         depends_on:
             - kmasasqlserver
-        environment:
-            ServerName: "kmasasqlserver"
-            Database: "kmasaDatabase"
-            UserName: "SA"
-            Password: "kmas@Database"
         ports:
-            - "5000:5000"
+            - "5001:5001"
+        image: coreapi:latest
