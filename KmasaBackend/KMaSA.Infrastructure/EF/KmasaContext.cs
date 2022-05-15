@@ -57,28 +57,21 @@ public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, Ident
     {
         modelBuilder.Entity<MentorEntity>().ToTable("mentors");
         modelBuilder.Entity<StudentEntity>().ToTable("students");
-        modelBuilder.Entity<CourseWorkEntity>().ToTable("course_works");
+        modelBuilder.Entity<CourseWorkEntity>().ToTable("courseWorks");
         modelBuilder.Entity<CourseEntity>().ToTable("courses");
         modelBuilder.Entity<SubjectEntity>().ToTable("subjects");
-        modelBuilder.Entity<StudyResourceEntity>().ToTable("study_resources");
-        modelBuilder.Entity<BlogArticleEntity>().ToTable("blog_articles");
+        modelBuilder.Entity<StudyResourceEntity>().ToTable("studyResources");
+        modelBuilder.Entity<BlogArticleEntity>().ToTable("blogArticles");
     }
 
     private void ConfigureConstraints(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<MentorEntity>().Property(m => m.FirstName).HasMaxLength(32);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.LastName).HasMaxLength(32);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.MiddleName).HasMaxLength(32);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.Title).HasMaxLength(64);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.Email).HasMaxLength(64);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.Biography).HasMaxLength(512);
-        modelBuilder.Entity<MentorEntity>().Property(m => m.PictureLink).HasMaxLength(256);
+        modelBuilder.Entity<UserEntity>().Property(m => m.FirstName).HasMaxLength(32);
+        modelBuilder.Entity<UserEntity>().Property(m => m.LastName).HasMaxLength(32);
+        modelBuilder.Entity<UserEntity>().Property(m => m.MiddleName).HasMaxLength(32);
 
-        modelBuilder.Entity<StudentEntity>().Property(s => s.FirstName).HasMaxLength(32);
-        modelBuilder.Entity<StudentEntity>().Property(s => s.LastName).HasMaxLength(32);
-        modelBuilder.Entity<StudentEntity>().Property(s => s.MiddleName).HasMaxLength(32);
-        modelBuilder.Entity<StudentEntity>().Property(s => s.Email).HasMaxLength(64);
-        modelBuilder.Entity<StudentEntity>().Property(s => s.PictureLink).HasMaxLength(256);
+        modelBuilder.Entity<MentorEntity>().Property(m => m.Title).HasMaxLength(64);
+        modelBuilder.Entity<MentorEntity>().Property(m => m.Biography).HasMaxLength(512);
 
         modelBuilder.Entity<CourseEntity>().Property(s => s.Number).HasConversion<string>();
 
