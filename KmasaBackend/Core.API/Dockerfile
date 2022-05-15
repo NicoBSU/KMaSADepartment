@@ -2,8 +2,8 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
+EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -15,7 +15,7 @@ COPY ["KMaSA.Infrastructure/KMaSA.Infrastructure.csproj", "KMaSA.Infrastructure/
 COPY ["DAInterfaces/DAInterfaces.csproj", "DAInterfaces/"]
 RUN dotnet restore "Core.API/Core.API.csproj"
 COPY . .
-WORKDIR "/src/Core.API"
+WORKDIR "/src/kmasabackend"
 RUN dotnet build "Core.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

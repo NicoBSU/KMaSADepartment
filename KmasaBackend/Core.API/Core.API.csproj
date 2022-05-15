@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -44,22 +44,6 @@
     <ProjectReference Include="..\KMaSA.BusinessLogic\KMaSA.BusinessLogic.csproj" />
     <ProjectReference Include="..\KMaSA.Infrastructure\KMaSA.Infrastructure.csproj" />
     <ProjectReference Include="..\KMaSA.Models\KMaSA.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\.dockerignore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\.dockerignore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\.dockerignore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\.dockerignore" />
   </ItemGroup>
 
 </Project>
