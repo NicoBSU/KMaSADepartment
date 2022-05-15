@@ -6,15 +6,20 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 
+import {NgsRevealModule} from 'ngx-scrollreveal';
+import { FooterMainComponent } from './footer-main/footer-main.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    FooterMainComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgsRevealModule
   ],
   providers: [],
   bootstrap: [AppComponent]

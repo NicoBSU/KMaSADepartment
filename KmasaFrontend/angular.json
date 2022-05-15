@@ -52,9 +52,13 @@
             ],
             "styles": [
               "./node_modules/boxicons/css/boxicons.min.css",
+              "./node_modules/swiper/swiper-bundle.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/scrollreveal/dist/scrollreveal.js",
+              "./node_modules/swiper/swiper-bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {

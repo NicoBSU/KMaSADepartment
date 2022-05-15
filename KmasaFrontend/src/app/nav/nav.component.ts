@@ -3,7 +3,8 @@ import { AfterContentInit, Component, OnInit, ViewChild, ElementRef } from '@ang
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
+  
 })
 export class NavComponent implements OnInit {
 

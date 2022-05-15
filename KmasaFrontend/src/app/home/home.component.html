@@ -1,1 +1,276 @@
-<p>home works!</p>
+<main class="l-main">
+    <section class="home bd-grid" id="home">
+        <div class="home-data">
+            <h1 class="home-title" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px'}">
+                Компьютерная математика <br> и системный анализ <br>
+                <span class="home-title-color">ММФ БГУ</span>
+            </h1>
+            <a href="#" class="button" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay:200}">
+                О специальности
+            </a>
+        </div>
+
+        <div class="home-social">
+            <a href="https://mmf.bsu.by/ru/" class="home-social-icon" 
+                [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                <i class='bx bxs-institution'></i>
+            </a>
+            <a href="https://mmf.bsu.by/ru/specialities/computer-mathematics-and-systems-analysis/" class="home-social-icon"
+                [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                <i class='bx bx-info-circle'></i>
+            </a>
+        </div>
+
+        <div class="home-img" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 400}">
+            <img src="/assets/img/cut1.png" alt="">
+        </div>
+    </section>
+
+    <section class="about section" id="about">
+        <h2 class="section-title">О специальности</h2>
+        <div class="about-container bd-grid">
+            <div class="about-img"[ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px'}">
+                <img src="/assets/img/about.jpg" alt="Stuff">
+            </div>
+            <div>
+                <p class="about-text" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 200}">
+                    <span>
+                        <h3 class="about-subtitle" 
+                        [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay:200}">
+                            Наша цель
+                        </h3>
+                    </span>
+                    - дать такие знания и навыки, которые позволят создавать математические методы
+                     и информационные технологии в тех областях, которые ранее не поддавались точному анализу, развивать у студентов системное мышление, 
+                    , анализировать сложные нелинейные процессы, принимать решения в условиях недостаточности информации, 
+                    предвидеть и оценивать последствия принимаемых решений. 
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="conditions section" id="conditions">
+        <h2 class="section-title">Для поступающих</h2>
+        <div class="conditions-container bd-grid">
+            <div>
+                <h3 class="conditions-subtitle" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px'}">
+                    Программа ориентирована для абитуриентов,
+                </h3>
+                    <p class="conditions-text" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 200}">
+                        интересующихся математикой и информационными технологиями,
+                        сочетает фундаментальное математическое образование, математическое и компьютерное моделирование 
+                        с основами прикладного системного анализа. Традиционно на нашу специальность поступают достаточно сильные абитуриенты.
+                        Подробная и актуальная информация для абитуриентов размещена на сайте 
+                        <a href="https://abiturient.bsu.by/">Абитуриент БГУ</a>. 
+                    </p>
+                    <div class="conditions-info"  [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                        <div class="condition-names">
+                            <i class='bx bx-check condition-icon'></i>
+                            <span class="condition-name">Проходной балл</span>
+                        </div>
+                        <div>
+                            <span class="conditions-value">332</span>
+                        </div>
+                    </div>
+                    <div class="conditions-info" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                        <div class="condition-names">
+                            <i class='bx bxs-pencil condition-icon'></i>
+                            <span class="condition-name">Экзамены</span>
+                        </div>
+                        <div>
+                            <span class="conditions-value">Математика, физика, 
+                                <br>беларуский (русский) язык</span>
+                        </div>
+                    </div>
+                    <div class="conditions-info" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                        <div class="condition-names">
+                            <i class='bx bxs-graduation condition-icon'></i>
+                            <span class="condition-name">Квалификация</span>
+                        </div>
+                        <div>
+                            <span class="conditions-value">Математик. Системный аналитик</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="conditions-chart-wrapper" 
+                [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 400}">
+                <canvas id="pointsChart" aria-label="Points chart" role="img" #pointsChart>
+                    <p>Points chart</p>
+                </canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="education-program section" id="about">
+        <h2 class="section-title">Программа специальности</h2>
+        <div class="education-program-container bd-grid">
+            <div class="education-program-chart-wrapper" 
+                [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px'}">
+                <canvas id="programChart" aria-label="Points chart" role="img" #programChart>
+                    <p>Points chart</p>
+                </canvas>
+            </div>
+            <div>
+                <p class="education-program-text"[ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 200}">
+                    <span>
+                        <h3 class="education-program-subtitle"
+                            [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 200}">
+                            Программа специальности
+                        </h3>
+                    </span>
+                     ориентирована на абитуриентов, которые одинаково интересуются математикой
+                     и информационными технологиями. Она сочетает фундаментальное математическое образование, 
+                     математическое и компьютерное моделирование с основами прикладного системного анализа.                    
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="future section" id="future">
+        <h2 class="section-title">Кем работают наши выпускники</h2>
+        <div class="future-data-container bd-grid" 
+            [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px'}">
+            <div>
+                <p class="future-text" 
+                    [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                    <span>
+                        <h3 class="future-subtitle" 
+                            [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', delay: 200}">
+                            Наши выпускники
+                        </h3>
+                    </span>
+                    пользуются устойчивым спросом у крупнейших отечественных компаний (например, EPAM Systems, Wargaming, Itransition, IBA, Exadel, InData Labs, 
+                    Системные технологии, ScienceSoft, HiQo Solutions, Qulix Systems, SaM Solutions и многих других). 
+                    Системные аналитики нужны им при разработке наиболее сложных проектов для решения задач 
+                    моделирования, проектирования, а также для координирования действий специалистов предметной 
+                    области и программистов, инженеров, специалистов по информационным технологиям.
+                </p>
+                <p class="future-text" 
+                    [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                    Часть наших выпускников продолжили обучение в магистратуре и аспирантуре в вузах Беларуси, России, Германии, Швеции, Франции, Италии, Испании. Более 10 выпускников нашей специализации 
+                    защитили кандидатские диссертации в области математики и
+                     теперь занимаются научными исследованиями или преподают в белорусских 
+                     или зарубежных университетах.
+                </p>
+                <p class="future-text"
+                    [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                    Основные направления трудоустройства наших выпускников:
+                </p>
+            </div>
+            <div class="future-container swiper">
+                <div class="swiper-wrapper">
+                    <div class="future-card swiper-slide">
+                        <img src="/assets//img/ml-eng.jpg" alt="" class="future-img">
+                        <div class="future-card-data">
+                            <h2 class="future-card-title">Машинное обучение</h2>
+                        </div>
+                    </div>
+                    <div class="future-card swiper-slide">
+                        <img src="/assets//img/business-analyst.jpg" alt="" class="future-img">
+                        <div class="future-card-data">
+                            <h2 class="future-card-title">Системный анализ</h2>
+                        </div>
+                    </div>
+                    <div class="future-card swiper-slide">
+                        <img src="/assets//img/softw-eng.jpg" alt="" class="future-img">
+                        <div class="future-card-data">
+                            <h2 class="future-card-title">Разработка</h2>
+                        </div>
+                    </div>
+                    <div class="future-card swiper-slide">
+                        <img src="/assets//img/mathematician.jpg" alt="" class="future-img">
+                        <div class="future-card-data">
+                            <h2 class="future-card-title">Преподавание</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+    </div> 
+    </section>
+
+    <section class="cooperation section">
+        <h2 class="section-title">Международная деятельность</h2>
+        <div class="cooperation-container bd-grid">
+            <div class="cooperation-content" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                <div class="cooperation-img">
+                    <img src="/assets/img/ovgu.jpg" alt="OvGU">
+                </div>    
+                <h2 class="cooperation-title">Проект с OvGU</h2>
+                <div class="cooperation-info-list">
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                В 2001 году специальность с названием «Компьютерная математика» была открыта
+                                 в <a href="https://www.ovgu.de/">Магдебургском университете (OvGU)</a>, что привело к налаживанию 
+                                 связей между университетами
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                В 2006 году эти связи были закреплены договором о сотрудничестве, 
+                                в рамках которого студенты нашей специальности имеют возможность 
+                                проходить производственную практику, а также обучаться в магистратуре 
+                                и аспирантуре OvGU
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cooperation-content" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                <div class="cooperation-img">
+                    <img src="/assets/img/tempus.jpg" alt="Tempus">
+                </div>    
+                <h2 class="cooperation-title">Проект TEMPUS</h2>
+                <div class="cooperation-info-list">
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                Учебный план специальности в 2005-2007 годах в рамках проекта TEMPUS был 
+                                адаптирован к Болонской программе и программе обучения в Магдебургском университете
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cooperation-content" [ngsReveal]="{ origin: 'top', duration:2000, reset:true, distance: '80px', interval: 200}">
+                <div class="cooperation-img">
+                    <img src="/assets/img/other_coop.jpg" alt="OvGU">
+                </div>    
+                <h2 class="cooperation-title">Другая деятельность</h2>
+                <div class="cooperation-info-list">
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                Стажировки в зарубежных университетах и исследовательских 
+                                центрах (например, <a href="https://www.um.si/en/home-page">Мариборский университет</a> и 
+                                <a href="http://www.ipgp.fr/fr">Парижский институт физики Земли</a>)    
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                Участие в советах по защите диссертаций (<a href="https://usm.md/">Молдавский государственный университет</a>)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cooperation-info-item">
+                        <i class='bx bxs-check-circle cooperation-icon'></i>
+                        <div>
+                            <p class="cooperation-text">
+                                Руководство иностранными магистрантами (Китай, Чехия, Сербия)                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
