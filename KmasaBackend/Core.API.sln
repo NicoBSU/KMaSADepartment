@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KMaSA.Models", "KMaSA.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLInterfaces", "BLInterfaces\BLInterfaces.csproj", "{14CBCE92-CC4F-40DA-B730-114AE60F6776}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D0AF8D87-C67C-4C61-83F5-99D6FAAD96FB}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EE8DB35D-52E8-4D2F-9A0D-2284A79FC68C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{14CBCE92-CC4F-40DA-B730-114AE60F6776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14CBCE92-CC4F-40DA-B730-114AE60F6776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14CBCE92-CC4F-40DA-B730-114AE60F6776}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0AF8D87-C67C-4C61-83F5-99D6FAAD96FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0AF8D87-C67C-4C61-83F5-99D6FAAD96FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0AF8D87-C67C-4C61-83F5-99D6FAAD96FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0AF8D87-C67C-4C61-83F5-99D6FAAD96FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8DB35D-52E8-4D2F-9A0D-2284A79FC68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8DB35D-52E8-4D2F-9A0D-2284A79FC68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8DB35D-52E8-4D2F-9A0D-2284A79FC68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8DB35D-52E8-4D2F-9A0D-2284A79FC68C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

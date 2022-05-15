@@ -27,13 +27,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Docker-Compose": {
-      "commandName": "DockerCompose",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
-      "useSSL": true
-    },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,

@@ -4,9 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "core.api": "DoNotStart",
-        "kmasabackend": "StartDebugging",
-        "kmasasqlserver": "StartWithoutDebugging"
+        "kmasabackend": "StartDebugging"
       }
     }
   }

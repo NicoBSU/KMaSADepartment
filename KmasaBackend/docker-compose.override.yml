@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.4'
 
 services:
     kmasasqlserver:
@@ -9,12 +9,18 @@ services:
             MSSQL_PID: Express
         ports:
             - "1433:1433"
-    core.api:
-        build:
-            context: .
-            dockerfile: Core.API/Dockerfile    
+        container_name: kmasadatabase
+
+    kmasabackend:
+        environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+        ports:
+        - "80"
+        - "443"
+        volumes:
+        - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+        - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+        container_name: kmasabackend
         depends_on:
             - kmasasqlserver
-        ports:
-            - "5001:5001"
-        image: coreapi:latest

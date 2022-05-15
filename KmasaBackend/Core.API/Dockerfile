@@ -15,7 +15,7 @@ COPY ["KMaSA.Infrastructure/KMaSA.Infrastructure.csproj", "KMaSA.Infrastructure/
 COPY ["DAInterfaces/DAInterfaces.csproj", "DAInterfaces/"]
 RUN dotnet restore "Core.API/Core.API.csproj"
 COPY . .
-WORKDIR "/src/Core.API"
+WORKDIR "/src/kmasabackend"
 RUN dotnet build "Core.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

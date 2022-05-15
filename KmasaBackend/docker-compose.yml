@@ -1,20 +1,13 @@
-version: '3.8'
+version: '3.4'
 
 services:
     kmasasqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
-        environment:
-            ACCEPT_EULA: "Y"
-            SA_PASSWORD: "kmas@Database"
-            MSSQL_PID: Express
         ports:
             - "1433:1433"
+
     kmasabackend:
+        image: ${DOCKER_REGISTRY-}kmasabackend
         build:
-            context: .
-            dockerfile: Core.API/Dockerfile    
-        depends_on:
-            - kmasasqlserver
-        ports:
-            - "5000:5000"
-        image: coreapi:latest
+          context: .
+          dockerfile: Core.API/Dockerfile
