@@ -2,9 +2,13 @@
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "kmasabackend",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "commandVersion": "1.0",
       "serviceActions": {
-        "kmasabackend": "StartDebugging"
+        "kmasabackend": "StartDebugging",
+        "kmasasqlserver": "StartWithoutDebugging"
       }
     }
   }
