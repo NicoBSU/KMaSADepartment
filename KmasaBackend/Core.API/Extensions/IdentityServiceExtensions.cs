@@ -51,7 +51,8 @@ namespace Core.API.Extensions
             services.AddAuthorization(opt =>
             {
                 opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+                opt.AddPolicy("RequireMentorRole", policy => policy.RequireRole("Mentor"));
+                opt.AddPolicy("RequireStudentRole", policy => policy.RequireRole("Student"));
             });
 
             return services;

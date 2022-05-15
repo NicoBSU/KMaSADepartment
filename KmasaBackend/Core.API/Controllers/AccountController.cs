@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
+using KMaSA.Infrastructure.EF;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
+using KMaSA.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +35,6 @@ namespace Core.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-
             if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
 
             var user = _mapper.Map<UserEntity>(registerDto);
@@ -42,9 +43,19 @@ namespace Core.API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            IdentityResult roleResult = null;
 
-            if (!roleResult.Succeeded) return BadRequest(result.Errors);
+            if (registerDto.UserType == UserType.Mentor)
+            {
+                roleResult = await _userManager.AddToRoleAsync(user, "Mentor");
+            }
+
+            if (registerDto.UserType == UserType.Student)
+            {
+                roleResult = await _userManager.AddToRoleAsync(user, "Student");
+            }
+            
+            if (!(roleResult?.Succeeded) ?? true) return BadRequest(result.Errors);
 
             return new UserDto
             {
@@ -67,7 +78,7 @@ namespace Core.API.Controllers
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            if (!result.Succeeded) return Unauthorized();
+            if (!result.Succeeded) return Unauthorized("Invalid password");
 
             return new UserDto
             {
