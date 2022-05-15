@@ -103,6 +103,16 @@ public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, Ident
             .WithOne(u => u.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+        modelBuilder.Entity<UserEntity>()
+            .HasOne(m => m.Student)
+            .WithOne(s => s.User)
+            .HasForeignKey<StudentEntity>(m => m.UserId)
+            .IsRequired(false);
+        modelBuilder.Entity<UserEntity>()
+            .HasOne(m => m.Mentor)
+            .WithOne(s => s.User)
+            .HasForeignKey<MentorEntity>(m => m.UserId)
+            .IsRequired(false);
         modelBuilder.Entity<MentorEntity>()
             .HasMany(m => m.CourseWorks)
             .WithOne(cw => cw.Mentor);

@@ -164,42 +164,15 @@ public class StudentsRepository : IStudentsRepository
         return true;
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
-    /// <exception cref="ArgumentException">Throws, picture link is null or empty or whitespace.</exception>
-    public async Task<bool> UpdatePicture(int studentId, string pictureLink)
+    private void Update(StudentEntity entity, StudentDto studentDto)
     {
-        if (studentId < 1)
-        {
-            throw new ArgumentOutOfRangeException(nameof(studentId), "Student's identifier must be positive.");
-        }
+        var course = autoMapper.Map<CourseEntity>(studentDto.Course);
+        var courseWork = autoMapper.Map<CourseWorkEntity>(studentDto.CourseWork);
+        var subjects = autoMapper.Map<List<SubjectEntity>>(studentDto.Subjects);
 
-        if (string.IsNullOrWhiteSpace(pictureLink))
-        {
-            throw new ArgumentException("Picture link is null or empty or whitespace.");
-        }
-
-        var entity = await this.dbContext.Students
-            .SingleOrDefaultAsync(s => s.Id == studentId);
-
-        if (entity is null)
-        {
-            return false;
-        }
-
-        entity.PictureLink = pictureLink;
-
-        await this.dbContext.SaveChangesAsync();
-
-        return true;
-    }
-
-    private static void Update(StudentEntity entity, StudentDto studentDto)
-    {
-        entity.FirstName = studentDto.FirstName;
-        entity.LastName = studentDto.LastName;
-        entity.MiddleName = studentDto.MiddleName;
-        entity.Email = studentDto.Email;
         entity.Rating = studentDto.Rating;
+        entity.Course = course;
+        entity.CourseWork = courseWork;
+        entity.Subjects = subjects;
     }
 }

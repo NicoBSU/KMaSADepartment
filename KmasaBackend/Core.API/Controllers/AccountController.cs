@@ -49,8 +49,7 @@ namespace Core.API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user),
-                Gender = user.Gender
+                Token = await _tokenService.CreateTokenAsync(user)
             };
         }
 
@@ -73,8 +72,7 @@ namespace Core.API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user),
-                Gender = user.Gender
+                Token = await _tokenService.CreateTokenAsync(user)
             };
         }
 

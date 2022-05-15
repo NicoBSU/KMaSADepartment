@@ -53,12 +53,4 @@ public interface IStudentsRepository
     /// <param name="studentId">Student's id.</param>
     /// <returns>True, if the student was deleted, otherwise, false.</returns>
     Task<bool> DeleteAsync(int studentId);
-
-    /// <summary>
-    /// Updates student's avatar.
-    /// </summary>
-    /// <param name="studentId">Id of the student</param>
-    /// <param name="pictureLink">Link to picture storage.</param>
-    /// <returns>True, if the link was updated, otherwise, false</returns>
-    Task<bool> UpdatePicture(int studentId, string pictureLink);
 }
