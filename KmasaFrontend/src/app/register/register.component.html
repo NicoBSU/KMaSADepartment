@@ -1,0 +1,74 @@
+<div class="l-form">
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+
+    <div class="form">
+        <form [formGroup]="credentials"
+             class="form__content" (ngSubmit)="credentials.valid && register()" >
+            <h1 class="form__title">Регистрация</h1>
+
+            <ul class="errors">
+                <li class="alert-danger"
+                *ngIf="credentials.controls['userName'].invalid && credentials.controls['userName'].touched">
+                    Неверный логин
+                </li>
+                <li class="alert-danger"
+                *ngIf="credentials.controls['password'].invalid && credentials.controls['password'].touched">
+                    Неврерный пароль. Допускается от 6 до 18 символов
+                </li>
+                <li class="alert-danger"
+                *ngIf="credentials.controls['confirmPassword'].invalid && credentials.controls['confirmPassword'].touched">
+                    Пароли не совпадают
+                </li>
+                <li *ngFor="let error of validationErrors">
+                    {{error}}
+                </li>
+            </ul>
+
+            <div class="form__div ng-touched ng-invalid form__div-one">
+                <div class="form__icon">
+                    <i class='bx bx-user-circle'></i>
+                </div>
+
+                <div class="form__div-input">
+                    <label for="" class="form__label">Логин</label>
+                    <input type="text" class="form__input"
+                        formControlName="userName"
+                        (focus)="addFocus($event)" (blur)="removeFocus($event)"
+                        required>
+                </div>
+            </div>
+
+            <div class="form__div form__div-one">
+                <div class="form__icon">
+                    <i class='bx bx-lock' ></i>
+                </div>
+
+                <div class="form__div-input">
+                    <label for="" class="form__label">Пароль</label>
+                    <input type="password" class="form__input" 
+                        formControlName="password"
+                        (focus)="addFocus($event)" (blur)="removeFocus($event)"
+                        required>
+                </div>
+            </div>
+
+            
+            <div class="form__div form__div-one">
+                <div class="form__icon">
+                    <i class='bx bx-lock' ></i>
+                </div>
+
+                <div class="form__div-input">
+                    <label for="" class="form__label">Подвердить пароль</label>
+                    <input type="password" class="form__input" 
+                        formControlName="confirmPassword"
+                        (focus)="addFocus($event)" (blur)="removeFocus($event)" 
+                        required>
+                </div>
+            </div>
+            
+            <button type="submit" class="form__button" [disabled]="!credentials.valid">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
