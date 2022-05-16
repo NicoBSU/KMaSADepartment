@@ -1,15 +1,11 @@
 ﻿using BLInterfaces.Interfaces;
 using Core.API.Extensions;
 using Core.API.Infrastructure;
+using DAInterfaces.Repositories;
 using KMaSA.BusinessLogic.Services;
 using KMaSA.Infrastructure.EF;
-using KMaSA.Models.Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using KMaSA.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace Core.API
 {
@@ -35,8 +31,20 @@ namespace Core.API
             services.AddCors();
 
             services.AddAutoMapper(typeof(KmasaMappingProfile).Assembly);
+
+            //services
+
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IMentorService, MentorService>();
+
+            //repositories
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IStudentsRepository, StudentsRepository>();
+            services.AddScoped<IMentorsRepository, MentorsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

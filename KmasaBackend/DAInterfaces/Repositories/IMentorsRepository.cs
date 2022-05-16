@@ -14,21 +14,21 @@ public interface IMentorsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of mentors.</returns>
-    Task<PagedModel<MentorDto>> GetAsync(int page, int limit);
+    Task<PagedModel<AddMentorDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets mentor by id.
     /// </summary>
     /// <param name="id">Mentor's id.</param>
     /// <returns>Mentor with specified id.</returns>
-    Task<MentorDto> GetByIdAsync(int id);
+    Task<AddMentorDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new mentor.
     /// </summary>
     /// <param name="mentorDto">New mentor.</param>
     /// <returns>Id of the added mentor.</returns>
-    Task<int> AddAsync(MentorDto mentorDto);
+    Task<int> AddAsync(AddMentorDto mentorDto);
 
     /// <summary>
     /// Updates mentor's info.
@@ -36,7 +36,7 @@ public interface IMentorsRepository
     /// <param name="mentorId">Mentor's id.</param>
     /// <param name="mentorDto">New values.</param>
     /// <returns>True, if mentor's information was updated, otherwise, false.</returns>
-    Task<bool> UpdateAsync(int mentorId, MentorDto mentorDto);
+    Task<bool> UpdateAsync(int mentorId, AddMentorDto mentorDto);
 
     /// <summary>
     /// Removes mentor.

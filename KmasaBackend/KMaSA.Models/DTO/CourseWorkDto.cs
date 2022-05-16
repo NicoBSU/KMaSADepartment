@@ -10,7 +10,7 @@ public class CourseWorkDto : IDto
 
     public CourseWorkStatus Status { get; set; }
 
-    public MentorDto Mentor { get; set; }
+    public AddMentorDto Mentor { get; set; }
 
-    public StudentDto Student { get; set; }
+    public AddStudentDto Student { get; set; }
 }

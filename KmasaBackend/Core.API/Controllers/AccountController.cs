@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
+using KMaSA.BusinessLogic.Services;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Core.API.Controllers
 {
@@ -17,30 +19,53 @@ namespace Core.API.Controllers
         private readonly SignInManager<UserEntity> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IStudentService _studentService;
+        private readonly IMentorService _mentorService;
 
-        public AccountController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager,
-            ITokenService tokenService, IMapper mapper)
+        public AccountController(UserManager<UserEntity> userManager,
+            SignInManager<UserEntity> signInManager,
+            ITokenService tokenService,
+            IMapper mapper,
+            IUserService userService,
+            IStudentService studentService,
+            IMentorService mentorService)
         {
 
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _userService = userService;
+            _mentorService = mentorService;
+            _studentService = studentService;
         }
 
         /// <summary>
         /// Register a user
         /// </summary>
         [HttpPost("register")]
-        public async Task<ActionResult<LoginUserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<LoginSuccessDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
-
-            var user = _mapper.Map<UserEntity>(registerDto);
-            user.UserName = registerDto.UserName.ToLower();
-
+            if (registerDto.Password != registerDto.ConfirmPassword) return BadRequest("Password and confirm password are not equal!");
+            
+            UserEntity user = await _userService.AddUser(registerDto, UserType.Mentor);
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
+            int userId = user.Id;
+
+            if (registerDto.UserType == UserType.Mentor)
+            {
+                if (registerDto.Mentor is null || registerDto.Student is not null) return BadRequest("Wrong type of user data entered, or correct one is null");
+                await _mentorService.AddMentor(registerDto.Mentor, userId);
+            }
+
+            if (registerDto.UserType == UserType.Student)
+            {
+                if (registerDto.Student is null || registerDto.Mentor is not null) return BadRequest("Wrong type of user data entered, or correct one is null");
+                await _studentService.AddStudent(registerDto.Student,userId);
+            }
 
             IdentityResult roleResult = null;
 
@@ -56,7 +81,7 @@ namespace Core.API.Controllers
             
             if (!(roleResult?.Succeeded) ?? true) return BadRequest(result.Errors);
 
-            return new LoginUserDto
+            return new LoginSuccessDto
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateTokenAsync(user)
@@ -68,7 +93,7 @@ namespace Core.API.Controllers
         /// Login a user
         /// </summary>
         [HttpPost("login")]
-        public async Task<ActionResult<LoginUserDto>> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<LoginSuccessDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
@@ -79,7 +104,7 @@ namespace Core.API.Controllers
 
             if (!result.Succeeded) return Unauthorized("Invalid password");
 
-            return new LoginUserDto
+            return new LoginSuccessDto
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateTokenAsync(user)

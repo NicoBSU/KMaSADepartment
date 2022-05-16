@@ -31,7 +31,7 @@ public class MentorsRepository : IMentorsRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<MentorDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<AddMentorDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -41,19 +41,19 @@ public class MentorsRepository : IMentorsRepository
         var entityPagedModel = await this.dbContext.Mentors
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<MentorDto>
+        return new PagedModel<AddMentorDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<MentorEntity>, IEnumerable<MentorDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<MentorEntity>, IEnumerable<AddMentorDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the mentor's id is less than zero.</exception>
-    public async Task<MentorDto> GetByIdAsync(int id)
+    public async Task<AddMentorDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
@@ -67,12 +67,12 @@ public class MentorsRepository : IMentorsRepository
             .Include(m => m.Subjects)
             .SingleOrDefaultAsync(m => m.Id == id);
 
-        return this.autoMapper.Map<MentorDto>(entity);
+        return this.autoMapper.Map<AddMentorDto>(entity);
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
-    public async Task<int> AddAsync(MentorDto mentorDto)
+    public async Task<int> AddAsync(AddMentorDto mentorDto)
     {
         if (mentorDto is null)
         {
@@ -89,7 +89,7 @@ public class MentorsRepository : IMentorsRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the mentor's id is less than zero.</exception>
-    public async Task<bool> UpdateAsync(int mentorId, MentorDto mentorDto)
+    public async Task<bool> UpdateAsync(int mentorId, AddMentorDto mentorDto)
     {
         if (mentorId < 1)
         {
@@ -137,15 +137,9 @@ public class MentorsRepository : IMentorsRepository
         return true;
     }
 
-    private void Update(MentorEntity entity, MentorDto dto)
+    private void Update(MentorEntity entity, AddMentorDto dto)
     {
-        var courseWorks = autoMapper.Map<List<CourseWorkEntity>>(dto.CourseWorks);
-        var subjects = autoMapper.Map<List<SubjectEntity>>(dto.Subjects);
-        var publications = autoMapper.Map<List<StudyResourceEntity>>(dto.Publications);
         entity.Biography = dto.Biography;
         entity.Title = dto.Title;
-        entity.CourseWorks = courseWorks;
-        entity.Subjects = subjects;
-        entity.Publications = publications;
     }
 }
