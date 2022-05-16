@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
-using KMaSA.Infrastructure.EF;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
@@ -33,7 +32,7 @@ namespace Core.API.Controllers
         /// Register a user
         /// </summary>
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<LoginUserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
 
@@ -57,7 +56,7 @@ namespace Core.API.Controllers
             
             if (!(roleResult?.Succeeded) ?? true) return BadRequest(result.Errors);
 
-            return new UserDto
+            return new LoginUserDto
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateTokenAsync(user)
@@ -69,7 +68,7 @@ namespace Core.API.Controllers
         /// Login a user
         /// </summary>
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<LoginUserDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
@@ -80,7 +79,7 @@ namespace Core.API.Controllers
 
             if (!result.Succeeded) return Unauthorized("Invalid password");
 
-            return new UserDto
+            return new LoginUserDto
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateTokenAsync(user)

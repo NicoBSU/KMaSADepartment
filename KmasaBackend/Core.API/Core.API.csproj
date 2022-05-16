@@ -38,10 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BLInterfaces\BLInterfaces.csproj" />
     <ProjectReference Include="..\KMaSA.BusinessLogic\KMaSA.BusinessLogic.csproj" />
     <ProjectReference Include="..\KMaSA.Infrastructure\KMaSA.Infrastructure.csproj" />

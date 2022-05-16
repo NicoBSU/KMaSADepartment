@@ -1,4 +1,7 @@
-﻿namespace KMaSA.Models.DTO;
+﻿using KMaSA.Models.Entities;
+using KMaSA.Models.Enums;
+
+namespace KMaSA.Models.DTO;
 
 public abstract class UpdateUserDto : IDto
 {

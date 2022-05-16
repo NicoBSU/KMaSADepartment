@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KMaSA.Infrastructure.EF;
+using KMaSA.Models;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,29 @@ namespace KMaSA.Infrastructure.Repositories
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             this.autoMapper = autoMapper ?? throw new ArgumentNullException(nameof(autoMapper));
         }
+
+        ///// <inheritdoc/>
+        ///// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
+        //public async Task<PagedModel<UserDto>> GetAsync(int page, int limit)
+        //{
+        //    if (limit < 0)
+        //    {
+        //        throw new ArgumentOutOfRangeException(nameof(limit), "Count of students must be non-negative.");
+        //    }
+
+        //    var entityPagedModel = await this.dbContext.Students
+        //        .Include(s => s.Course)
+        //        .PaginateAsync(page, limit, new CancellationToken());
+
+        //    return new PagedModel<StudentDto>
+        //    {
+        //        PageSize = entityPagedModel.PageSize,
+        //        CurrentPage = entityPagedModel.CurrentPage,
+        //        TotalCount = entityPagedModel.TotalCount,
+        //        Items = this.autoMapper
+        //            .Map<IEnumerable<StudentEntity>, IEnumerable<StudentDto>>(entityPagedModel.Items),
+        //    };
+        //}
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
@@ -53,7 +77,7 @@ namespace KMaSA.Infrastructure.Repositories
             return true;
         }
 
-        private static void Update(UserEntity entity, UpdateUserDto userDto)
+        private static void Update(UserEntity entity, UserDto userDto)
         {
             entity.FirstName = userDto.FirstName;
             entity.LastName = userDto.LastName;
