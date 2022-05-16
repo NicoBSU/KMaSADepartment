@@ -14,7 +14,7 @@ public interface IStudentsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<AddStudentDto>> GetAsync(int page, int limit);
+    Task<PagedModel<GetStudentDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets students of the certain course.
@@ -23,14 +23,14 @@ public interface IStudentsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<AddStudentDto>> GetByCourseAsync(CourseDto course, int page, int limit);
+    Task<PagedModel<GetStudentDto>> GetByCourseAsync(CourseDto course, int page, int limit);
 
     /// <summary>
     /// Gets student by id.
     /// </summary>
     /// <param name="id">Student's id.</param>
     /// <returns>Student with specified id.</returns>
-    Task<AddStudentDto> GetByIdAsync(int id);
+    Task<GetStudentDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new student.

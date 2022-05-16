@@ -10,8 +10,13 @@ public sealed class KmasaMappingProfile : Profile
     public KmasaMappingProfile()
     {
         this.CreateMap<RegisterDto, UserEntity>();
+
         this.CreateMap<AddMentorDto, MentorEntity>().ReverseMap();
+        this.CreateMap<GetMentorDto, MentorEntity>().ReverseMap();
+
         this.CreateMap<AddStudentDto, StudentEntity>().ReverseMap();
+        this.CreateMap<GetStudentDto, StudentEntity>().ReverseMap();
+
         this.CreateMap<CourseDto, CourseEntity>().ReverseMap();
         this.CreateMap<UserDto, UserEntity>().ReverseMap();
         this.CreateMap<StudyResourceDto, StudyResourceEntity>().ReverseMap();
