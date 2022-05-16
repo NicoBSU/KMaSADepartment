@@ -1,4 +1,6 @@
-﻿namespace KMaSA.Models.DTO;
+﻿using KMaSA.Models.DTO.Account;
+
+namespace KMaSA.Models.DTO;
 
 public class SubjectDto : IDto
 {

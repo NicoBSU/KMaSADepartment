@@ -1,5 +1,5 @@
 ﻿using KMaSA.Models;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
 
 namespace DAInterfaces.Repositories;
 

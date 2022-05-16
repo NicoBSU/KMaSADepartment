@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 

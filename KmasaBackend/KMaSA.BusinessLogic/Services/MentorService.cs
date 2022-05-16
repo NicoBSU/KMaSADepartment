@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
 using DAInterfaces.Repositories;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Entities;
 
 namespace KMaSA.BusinessLogic.Services

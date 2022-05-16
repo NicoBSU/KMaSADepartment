@@ -1,4 +1,4 @@
-﻿using KMaSA.Models.DTO;
+﻿using KMaSA.Models.DTO.Account;
 
 namespace BLInterfaces.Interfaces
 {
