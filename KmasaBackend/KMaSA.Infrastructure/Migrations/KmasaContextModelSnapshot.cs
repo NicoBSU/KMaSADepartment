@@ -55,7 +55,7 @@ namespace KMaSA.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_blog_articles");
 
-                    b.ToTable("blog_articles", (string)null);
+                    b.ToTable("blogArticles", (string)null);
                 });
 
             modelBuilder.Entity("KMaSA.Models.Entities.CourseEntity", b =>
@@ -116,7 +116,7 @@ namespace KMaSA.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_course_works_student_id");
 
-                    b.ToTable("course_works", (string)null);
+                    b.ToTable("courseWorks", (string)null);
                 });
 
             modelBuilder.Entity("KMaSA.Models.Entities.MentorEntity", b =>
@@ -133,47 +133,22 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasColumnType("nvarchar(512)")
                         .HasColumnName("biography");
 
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("birth_date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("first_name");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("last_name");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("middle_name");
-
-                    b.Property<string>("PictureLink")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .HasColumnName("picture_link");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)")
                         .HasColumnName("title");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_mentors");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_mentors_user_id");
 
                     b.ToTable("mentors", (string)null);
                 });
@@ -226,43 +201,23 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("course_id");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("first_name");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("last_name");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
-                        .HasColumnName("middle_name");
-
-                    b.Property<string>("PictureLink")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .HasColumnName("picture_link");
-
                     b.Property<double?>("Rating")
                         .HasColumnType("float")
                         .HasColumnName("rating");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id")
                         .HasName("pk_students");
 
                     b.HasIndex("CourseId")
                         .HasDatabaseName("ix_students_course_id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_students_user_id");
 
                     b.ToTable("students", (string)null);
                 });
@@ -290,7 +245,7 @@ namespace KMaSA.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_study_resources");
 
-                    b.ToTable("study_resources", (string)null);
+                    b.ToTable("studyResources", (string)null);
                 });
 
             modelBuilder.Entity("KMaSA.Models.Entities.SubjectEntity", b =>
@@ -376,6 +331,12 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("email_confirmed");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)")
+                        .HasColumnName("first_name");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -385,6 +346,12 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("last_active");
 
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)")
+                        .HasColumnName("last_name");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit")
                         .HasColumnName("lockout_enabled");
@@ -392,6 +359,11 @@ namespace KMaSA.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset")
                         .HasColumnName("lockout_end");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)")
+                        .HasColumnName("middle_name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -415,6 +387,10 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("phone_number_confirmed");
 
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("photo_url");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("security_stamp");
@@ -427,6 +403,10 @@ namespace KMaSA.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)")
                         .HasColumnName("user_name");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("int")
+                        .HasColumnName("user_type");
 
                     b.HasKey("Id")
                         .HasName("pk_asp_net_users");
@@ -650,6 +630,16 @@ namespace KMaSA.Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("KMaSA.Models.Entities.MentorEntity", b =>
+                {
+                    b.HasOne("KMaSA.Models.Entities.UserEntity", "User")
+                        .WithOne("Mentor")
+                        .HasForeignKey("KMaSA.Models.Entities.MentorEntity", "UserId")
+                        .HasConstraintName("fk_mentors_users_user_id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("KMaSA.Models.Entities.StudentEntity", b =>
                 {
                     b.HasOne("KMaSA.Models.Entities.CourseEntity", "Course")
@@ -659,7 +649,14 @@ namespace KMaSA.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_students_courses_course_id");
 
+                    b.HasOne("KMaSA.Models.Entities.UserEntity", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("KMaSA.Models.Entities.StudentEntity", "UserId")
+                        .HasConstraintName("fk_students_users_user_id");
+
                     b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("KMaSA.Models.Entities.SubjectEntity", b =>
@@ -807,6 +804,12 @@ namespace KMaSA.Infrastructure.Migrations
 
             modelBuilder.Entity("KMaSA.Models.Entities.UserEntity", b =>
                 {
+                    b.Navigation("Mentor")
+                        .IsRequired();
+
+                    b.Navigation("Student")
+                        .IsRequired();
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

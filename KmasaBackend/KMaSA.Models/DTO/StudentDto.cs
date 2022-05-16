@@ -1,6 +1,6 @@
 ﻿namespace KMaSA.Models.DTO;
 
-public class StudentDto : PersonDto
+public class StudentDto
 {
     public double Rating { get; set; }
 

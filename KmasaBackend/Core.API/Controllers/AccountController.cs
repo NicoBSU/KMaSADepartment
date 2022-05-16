@@ -2,6 +2,7 @@
 using BLInterfaces.Interfaces;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
+using KMaSA.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +32,8 @@ namespace Core.API.Controllers
         /// Register a user
         /// </summary>
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<LoginUserDto>> Register(RegisterDto registerDto)
         {
-
             if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
 
             var user = _mapper.Map<UserEntity>(registerDto);
@@ -42,15 +42,24 @@ namespace Core.API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
 
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            IdentityResult roleResult = null;
 
-            if (!roleResult.Succeeded) return BadRequest(result.Errors);
+            if (registerDto.UserType == UserType.Mentor)
+            {
+                roleResult = await _userManager.AddToRoleAsync(user, "Mentor");
+            }
 
-            return new UserDto
+            if (registerDto.UserType == UserType.Student)
+            {
+                roleResult = await _userManager.AddToRoleAsync(user, "Student");
+            }
+            
+            if (!(roleResult?.Succeeded) ?? true) return BadRequest(result.Errors);
+
+            return new LoginUserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user),
-                Gender = user.Gender
+                Token = await _tokenService.CreateTokenAsync(user)
             };
         }
 
@@ -59,7 +68,7 @@ namespace Core.API.Controllers
         /// Login a user
         /// </summary>
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<LoginUserDto>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
@@ -68,13 +77,12 @@ namespace Core.API.Controllers
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            if (!result.Succeeded) return Unauthorized();
+            if (!result.Succeeded) return Unauthorized("Invalid password");
 
-            return new UserDto
+            return new LoginUserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user),
-                Gender = user.Gender
+                Token = await _tokenService.CreateTokenAsync(user)
             };
         }
 

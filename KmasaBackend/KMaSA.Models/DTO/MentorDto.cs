@@ -1,9 +1,7 @@
 ﻿namespace KMaSA.Models.DTO;
 
-public class MentorDto : PersonDto
+public class MentorDto
 {
-    public DateTime BirthDate { get; set; }
-
     public string Title { get; set; }
 
     public string Biography { get; set; }

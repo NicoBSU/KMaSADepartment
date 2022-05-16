@@ -36,7 +36,7 @@ namespace Core.API
 
             services.AddAutoMapper(typeof(KmasaMappingProfile).Assembly);
             services.AddScoped<ITokenService, TokenService>();
-
+            services.AddScoped<IPhotoService, PhotoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
