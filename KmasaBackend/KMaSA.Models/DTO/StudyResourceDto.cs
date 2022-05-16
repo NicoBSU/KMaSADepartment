@@ -10,5 +10,5 @@ public class StudyResourceDto : IDto
 
     public ICollection<SubjectDto> Subjects { get; set; }
 
-    public ICollection<MentorDto> TaggedMentors { get; set; }
+    public ICollection<AddMentorDto> TaggedMentors { get; set; }
 }

@@ -10,7 +10,7 @@ public class SubjectDto : IDto
 
     public string PictureLink { get; set; }
 
-    public ICollection<MentorDto> Mentors { get; set; }
+    public ICollection<AddMentorDto> Mentors { get; set; }
 
     public ICollection<StudyResourceDto> Literature { get; set; }
 }

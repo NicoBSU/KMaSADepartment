@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+using DAInterfaces.Repositories;
 using KMaSA.Infrastructure.EF;
-using KMaSA.Models;
 using KMaSA.Models.DTO;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace KMaSA.Infrastructure.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly KmasaContext dbContext;
         private readonly IMapper autoMapper;
@@ -70,7 +70,7 @@ namespace KMaSA.Infrastructure.Repositories
                 return false;
             }
 
-            entity.PhotoUrl = photoUrl;
+            //entity.PhotoUrl = photoUrl;
 
             await this.dbContext.SaveChangesAsync();
 

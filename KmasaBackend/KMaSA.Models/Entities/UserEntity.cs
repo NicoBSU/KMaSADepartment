@@ -8,7 +8,7 @@ namespace KMaSA.Models.Entities
         public UserType UserType { get; set; }
         public MentorEntity Mentor { get; set; } = null;
         public StudentEntity Student { get; set; } = null;
-        public string? PhotoUrl { get; set; }
+        public PhotoEntity? Photo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string? MiddleName { get; set; }

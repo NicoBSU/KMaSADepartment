@@ -7,6 +7,4 @@ public class CourseDto : IDto
     public int Id { get; set; }
 
     public CourseName Number { get; set; }
-
-    public ICollection<StudentDto> Students { get; set; }
 }

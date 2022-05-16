@@ -1,11 +1,10 @@
-﻿using KMaSA.Models.Entities;
-using KMaSA.Models.Enums;
+﻿using KMaSA.Models.Enums;
 
 namespace KMaSA.Models.DTO;
 
-public abstract class UserDto : IDto
+public class UserDto
 {
-    public int Id { get; set; }
+    public UserType UserType { get; set; }
 
     public string FirstName { get; set; }
 
@@ -15,7 +14,7 @@ public abstract class UserDto : IDto
 
     public string Email { get; set; }
 
-    public string PhotoUrl { get; set; }
+    public PhotoDto? Photo { get; set; }
 
     public DateTime DateOfBirth { get; set; }
 

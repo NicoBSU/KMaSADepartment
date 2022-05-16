@@ -34,6 +34,8 @@ public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, Ident
 
     public DbSet<BlogArticleEntity> Blogs { get; set; }
 
+    public DbSet<PhotoEntity> Photos { get; set; }
+
     /// <summary>
     /// Configures tables naming conventions.
     /// </summary>
@@ -62,6 +64,7 @@ public class KmasaContext : IdentityDbContext<UserEntity, RoleEntity, int, Ident
         modelBuilder.Entity<SubjectEntity>().ToTable("subjects");
         modelBuilder.Entity<StudyResourceEntity>().ToTable("studyResources");
         modelBuilder.Entity<BlogArticleEntity>().ToTable("blogArticles");
+        modelBuilder.Entity<PhotoEntity>().ToTable("photos");
     }
 
     private void ConfigureConstraints(ModelBuilder modelBuilder)
