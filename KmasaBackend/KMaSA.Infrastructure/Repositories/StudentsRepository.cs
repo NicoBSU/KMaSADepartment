@@ -3,7 +3,8 @@ using DAInterfaces.Repositories;
 using KMaSA.Infrastructure.EF;
 using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Students;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ public class StudentsRepository : IStudentsRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<AddStudentDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<GetStudentDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -42,45 +43,43 @@ public class StudentsRepository : IStudentsRepository
             .Include(s => s.Course)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<AddStudentDto>
+        return new PagedModel<GetStudentDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<StudentEntity>, IEnumerable<AddStudentDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<StudentEntity>, IEnumerable<GetStudentDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<AddStudentDto>> GetByCourseAsync(CourseDto course, int page, int limit)
+    public async Task<PagedModel<GetStudentDto>> GetByCourseAsync(int courseId, int page, int limit)
     {
         if (limit < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(limit), "Count of students must be non-negative.");
         }
 
-        var courseEntity = this.autoMapper.Map<CourseEntity>(course);
-
         var entityPagedModel = await this.dbContext.Students
             .Include(s => s.Course)
-            .Where(s => s.Course == courseEntity)
+            .Where(s => s.Course.Id == courseId)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<AddStudentDto>
+        return new PagedModel<GetStudentDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<StudentEntity>, IEnumerable<AddStudentDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<StudentEntity>, IEnumerable<GetStudentDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
-    public async Task<AddStudentDto> GetByIdAsync(int id)
+    public async Task<GetStudentDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
@@ -91,10 +90,10 @@ public class StudentsRepository : IStudentsRepository
             .Include(s => s.Course)
             .Include(s => s.Subjects)
             .Include(s=> s.CourseWork)
-            .ThenInclude(cw => cw.Status)
+            .ThenInclude(cw => (cw as CourseWorkEntity).Status)
             .SingleOrDefaultAsync(m => m.Id == id);
 
-        return this.autoMapper.Map<AddStudentDto>(entity);
+        return this.autoMapper.Map<GetStudentDto>(entity);
     }
 
     /// <inheritdoc/>
@@ -116,7 +115,7 @@ public class StudentsRepository : IStudentsRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the student's id is less than zero.</exception>
-    public async Task<bool> UpdateAsync(int studentId, AddStudentDto studentDto)
+    public async Task<bool> UpdateAsync(int studentId, UpdateStudentDto studentDto)
     {
         if (studentId < 1)
         {
@@ -164,7 +163,7 @@ public class StudentsRepository : IStudentsRepository
         return true;
     }
 
-    private void Update(StudentEntity entity, AddStudentDto studentDto)
+    private void Update(StudentEntity entity, UpdateStudentDto studentDto)
     {
         entity.Rating = studentDto.Rating;
     }

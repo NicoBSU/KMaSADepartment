@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Mentors;
+using KMaSA.Models.DTO.Students;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 
@@ -10,8 +13,13 @@ public sealed class KmasaMappingProfile : Profile
     public KmasaMappingProfile()
     {
         this.CreateMap<RegisterDto, UserEntity>();
+
         this.CreateMap<AddMentorDto, MentorEntity>().ReverseMap();
+        this.CreateMap<GetMentorDto, MentorEntity>().ReverseMap();
+
         this.CreateMap<AddStudentDto, StudentEntity>().ReverseMap();
+        this.CreateMap<GetStudentDto, StudentEntity>().ReverseMap();
+
         this.CreateMap<CourseDto, CourseEntity>().ReverseMap();
         this.CreateMap<UserDto, UserEntity>().ReverseMap();
         this.CreateMap<StudyResourceDto, StudyResourceEntity>().ReverseMap();

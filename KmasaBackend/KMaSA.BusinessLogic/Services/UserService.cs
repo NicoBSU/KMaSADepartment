@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
 using DAInterfaces.Repositories;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 using Microsoft.AspNetCore.Identity;
@@ -39,10 +39,7 @@ namespace KMaSA.BusinessLogic.Services
                 LastName = registerDto.User.LastName,
                 MiddleName = registerDto.User.MiddleName,
                 Email = registerDto.User.Email,
-                DateOfBirth = registerDto.User.DateOfBirth,
-                Gender = registerDto.User.Gender,
-                City = registerDto.User.City,
-                Country = registerDto.User.Country,
+                DateOfBirth = registerDto.User.DateOfBirth
             };
             return user;
         }

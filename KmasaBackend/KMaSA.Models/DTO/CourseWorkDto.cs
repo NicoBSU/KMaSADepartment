@@ -1,4 +1,5 @@
-﻿using KMaSA.Models.Enums;
+﻿using KMaSA.Models.DTO.Account;
+using KMaSA.Models.Enums;
 
 namespace KMaSA.Models.DTO;
 

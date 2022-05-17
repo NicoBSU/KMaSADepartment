@@ -39,12 +39,20 @@ namespace Core.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IMentorService, MentorService>();
+            services.AddScoped<IBlogArticlesService, BlogArticlesService>();
+            services.AddScoped<ICourseWorksService, CourseWorksService>();
+            services.AddScoped<IStudyResourcesService, StudyResourcesService>();
+            services.AddScoped<ISubjectsService, SubjectsService>();
 
             //repositories
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStudentsRepository, StudentsRepository>();
             services.AddScoped<IMentorsRepository, MentorsRepository>();
+            services.AddScoped<IBlogArticlesRepository, BlogArticlesRepository>();
+            services.AddScoped<ICourseWorksRepository, CourseWorksRepository>();
+            services.AddScoped<IStudyResourcesRepository, StudyResourceRepository>();
+            services.AddScoped<ISubjectsRepository, SubjectsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

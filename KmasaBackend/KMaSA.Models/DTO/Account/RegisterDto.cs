@@ -1,6 +1,6 @@
 ﻿using KMaSA.Models.Enums;
 
-namespace KMaSA.Models.DTO
+namespace KMaSA.Models.DTO.Account
 {
     public class RegisterDto
     {

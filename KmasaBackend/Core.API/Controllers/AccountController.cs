@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using BLInterfaces.Interfaces;
-using KMaSA.BusinessLogic.Services;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace Core.API.Controllers
 {
