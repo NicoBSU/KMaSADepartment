@@ -83,10 +83,7 @@ namespace KMaSA.Infrastructure.Repositories
             entity.LastName = userDto.LastName;
             entity.MiddleName = userDto.MiddleName;
             entity.Email = userDto.Email;
-            entity.City = userDto.City;
-            entity.Country = userDto.Country;
             entity.DateOfBirth = userDto.DateOfBirth;
-            entity.Gender = userDto.Gender;
         }
     }
 }
