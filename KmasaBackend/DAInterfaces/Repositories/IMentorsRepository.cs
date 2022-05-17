@@ -1,5 +1,6 @@
 ﻿using KMaSA.Models;
 using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Mentors;
 
 namespace DAInterfaces.Repositories;
 
@@ -14,14 +15,14 @@ public interface IMentorsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of mentors.</returns>
-    Task<PagedModel<AddMentorDto>> GetAsync(int page, int limit);
+    Task<PagedModel<GetMentorDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets mentor by id.
     /// </summary>
     /// <param name="id">Mentor's id.</param>
     /// <returns>Mentor with specified id.</returns>
-    Task<AddMentorDto> GetByIdAsync(int id);
+    Task<GetMentorDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new mentor.
@@ -36,7 +37,7 @@ public interface IMentorsRepository
     /// <param name="mentorId">Mentor's id.</param>
     /// <param name="mentorDto">New values.</param>
     /// <returns>True, if mentor's information was updated, otherwise, false.</returns>
-    Task<bool> UpdateAsync(int mentorId, AddMentorDto mentorDto);
+    Task<bool> UpdateAsync(int mentorId, UpdateMentorDto mentorDto);
 
     /// <summary>
     /// Removes mentor.

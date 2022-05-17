@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using KMaSA.Models.DTO;
 using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Mentors;
+using KMaSA.Models.DTO.Students;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 

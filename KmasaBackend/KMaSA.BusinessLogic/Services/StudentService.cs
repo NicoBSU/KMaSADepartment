@@ -2,7 +2,6 @@
 using BLInterfaces.Interfaces;
 using DAInterfaces.Repositories;
 using KMaSA.Models;
-using KMaSA.Models.DTO;
 using KMaSA.Models.DTO.Account;
 using KMaSA.Models.DTO.Students;
 using KMaSA.Models.Entities;
@@ -48,8 +47,8 @@ namespace KMaSA.BusinessLogic.Services
 
         public async Task<bool> UpdateStudent(int studentId, UpdateStudentDto userDto)
         {
-            var student = await _studentsRepository.UpdateAsync(studentId, userDto);
-            return student;
+            var result = await _studentsRepository.UpdateAsync(studentId, userDto);
+            return result;
         }
     }
 }

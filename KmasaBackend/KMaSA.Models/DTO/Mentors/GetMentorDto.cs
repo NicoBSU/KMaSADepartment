@@ -1,4 +1,4 @@
-﻿namespace KMaSA.Models.DTO
+﻿namespace KMaSA.Models.DTO.Mentors
 {
     public class GetMentorDto
     {
