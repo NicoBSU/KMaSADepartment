@@ -1,6 +1,7 @@
 ﻿using KMaSA.Models;
 using KMaSA.Models.DTO;
 using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Students;
 
 namespace DAInterfaces.Repositories;
 
@@ -24,7 +25,7 @@ public interface IStudentsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of students.</returns>
-    Task<PagedModel<GetStudentDto>> GetByCourseAsync(CourseDto course, int page, int limit);
+    Task<PagedModel<GetStudentDto>> GetByCourseAsync(int courseId, int page, int limit);
 
     /// <summary>
     /// Gets student by id.
@@ -46,7 +47,7 @@ public interface IStudentsRepository
     /// <param name="studentId">Student's id.</param>
     /// <param name="studentDto">New values.</param>
     /// <returns>True, if student's information was updated, otherwise, false.</returns>
-    Task<bool> UpdateAsync(int studentId, AddStudentDto studentDto);
+    Task<bool> UpdateAsync(int studentId, UpdateStudentDto studentDto);
 
     /// <summary>
     /// Removes student.
