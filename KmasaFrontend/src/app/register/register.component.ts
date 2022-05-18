@@ -93,8 +93,20 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   register(): void{
     this.submitted = true;
-    
-    this.authService.register(this.credentials.value).subscribe(
+
+    this.authService.register(new UserRegistrationDto(
+      <string><unknown>this.credentials.get('userName'),
+      <string><unknown>this.credentials.get('password'),
+      <string><unknown>this.credentials.get('confirmPassword'),
+      <string><unknown>this.credentials.get('dateOfBirth'),
+      <string><unknown>this.credentials.get('firstName'),
+      <string><unknown>this.credentials.get('lastName'),
+      <string><unknown>this.credentials.get('userType'),
+      <string><unknown>this.credentials.get('title'),
+      <number><unknown>this.credentials.get('number'),
+      <string><unknown>this.credentials.get('middleName'),
+      <string><unknown>this.credentials.get('url'),
+      )).subscribe(
     {
       next: () => this.router.navigateByUrl(''),
       error: (e) => this.validationErrors = e,
