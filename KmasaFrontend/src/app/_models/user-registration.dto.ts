@@ -6,10 +6,10 @@ export interface UserRegistrationDto {
         dateOfBirth: string,
         firstName: string,
         lastName: string,
-        middleName: string | null,
+        middleName?: string,
         photo: {
             id: number
-            url: string | null,
+            url?: string,
         }    
     };
 
@@ -17,7 +17,7 @@ export interface UserRegistrationDto {
 
     mentor: {
         title: string,
-        biography: string
+        biography?: string
     };
 
     student:{

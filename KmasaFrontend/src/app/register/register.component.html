@@ -2,142 +2,129 @@
     <div class="shape1"></div>
     <div class="shape2"></div>
 
-    <form method="post" autocomplete = "off">
-        <h1 class="form__title">Регистрация</h1>
+    <div class="form">
+        <form [formGroup]="credentials"
+             class="form__content" (ngSubmit)="credentials.valid && register()" >
+            <h1 class="form__title">Вход</h1>
 
-      <div class="steps">
-        <span class="step" id = "step-1">1</span>
-        <span class="step" id = "step-2">2</span>
-        <span class="step" id = "step-3">3</span>
-        <span class="step" id = "step-4">4</span>
-      </div>
-
-      <div class="tab" id="tab-1">
-          <div class="form-inputs">
-            <div class="form__div form__div-one">
-                <div class="form__icon">
-                    <i class='bx bx-user-circle'></i>
-                </div>
-    
-                <div class="form__div-input">
-                    <label for="" class="form__label">Фамилия</label>
-                    <input type="text" class="form__input" [(ngModel)]="credentials.user.lastName">
-                </div>
-            </div>
-
-            <div class="form__div form__div-one">
-                <div class="form__icon">
-                    <i class='bx bx-user-circle'></i>
-                </div>
-    
-                <div class="form__div-input">
-                    <label for="" class="form__label">Имя</label>
-                    <input type="text" class="form__input" [(ngModel)]="credentials.user.firstName">
-                </div>
-            </div>
-    
-            <div class="form__div">
-                <div class="form__icon">
-                    <i class='bx bx-user-circle'></i>
-                </div>
-    
-                <div class="form__div-input">
-                    <label for="" class="form__label">Отчество</label>
-                    <input type="text" class="form__input" [(ngModel)]="credentials.user.middleName">
-                </div>
-            </div>    
-          </div>
-        <div class="index-btn-wrapper">
-          <div class="form__button index-btn" (click)="move(1, 2)">Далее</div>
-        </div>
-      </div>
-
-      <div class="tab" id = "tab-2">
-        <div class="form-inputs">
-            <div class="form__div form__div-one">
-                <div class="form__icon">
-                    <i class='bx bx-calendar'></i>
-                </div>
-
-                <div class="form__div-input">
-                    <label for="" class="select__label">Дата рождения</label>
-                    <input type="date" class="form__input" [(ngModel)]="credentials.user.dateOfBirth">
-                </div>
-            </div>
-
-            <div class="form__div">
-                <div class="form__icon">
-                    <i class='bx bx-briefcase-alt-2'></i>
-                </div>
-
-                <div class="form__div-input">
-                    <label for="" class="select__label">Статус</label>
-                    <select type="text" class="form__input select-field" [(ngModel)]="credentials.userType">
-                        <option disabled selected>Укажите статус</option>
-                        <option>Студент</option>
-                        <option>Преподаватель</option>
-                    </select>
-                </div>
+            <div formGroupName="user">
+            <div class="tab tab-hidden" #tab>
+                  <div class="form__div form__div-one">
+                      <div class="form__icon">
+                          <i class='bx bx-user-circle'></i>
+                      </div>
+          
+                      <div class="form__div-input">
+                          <label for="" class="form__label">Фамилия</label>
+                          <input type="text" class="form__input" formControlName="lastName"
+                          (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                      </div>
+                  </div>
+      
+                  <div class="form__div form__div-one">
+                      <div class="form__icon">
+                          <i class='bx bx-user-circle'></i>
+                      </div>
+          
+                      <div class="form__div-input">
+                          <label for="" class="form__label">Имя</label>
+                          <input type="text" class="form__input" formControlName="firstName"
+                          (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                      </div>
+                  </div>
+          
+                  <div class="form__div form__div-one">
+                      <div class="form__icon">
+                          <i class='bx bx-user-circle'></i>
+                      </div>
+          
+                      <div class="form__div-input">
+                          <label for="" class="form__label">Отчество</label>
+                          <input type="text" class="form__input" formControlName="middleName"
+                          (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                      </div>
+                  </div>    
+              <div class="index-btn-wrapper">
+                <div class="form__button index-btn" (click)="move(1, 2)">Далее</div>
+              </div>
             </div>
         </div>
-        <div class="index-btn-wrapper">
-            <div class="form__button" (click)="move(2, 1);">Назад</div>
-            <div class="form__button" (click)="move(2, 3);">Далее</div>
-          </div>
-        </div>
-
-        <div class="tab" id = "tab-3">
-            <div class="form-inputs">    
-                <div class="form__div">
+        <div class="tab tab-hidden" #tab>
+            <div formGroupName="user">
+                <div class="form__div form__div-one">
                     <div class="form__icon">
-                        <i class='bx bxs-graduation'></i>
+                        <i class='bx bx-calendar'></i>
                     </div>
     
                     <div class="form__div-input">
-                        <label for="" class="select__label">Курс</label>
-                        <select type="text" class="form__input select-field" [(ngModel)]="credentials.student.course">
-                            <option disabled selected>Укажите курс</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                        <label for="" class="select__label">Дата рождения</label>
+                        <input type="date" class="form__input" formControlName="dateOfBirth"
+                        (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                    </div>
+                </div>
+            </div>
+                <div class="form__div form__div-one">
+                    <div class="form__icon">
+                        <i class='bx bx-briefcase-alt-2'></i>
+                    </div>
+    
+                    <div class="form__div-input">
+                        <label for="" class="select__label">Статус</label>
+                        <select type="text" class="form__input select-field" 
+                            formControlName="userType"
+                            (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                            <option disabled selected>Укажите статус</option>
+                            <option>Студент</option>
+                            <option>Преподаватель</option>
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="index-btn-wrapper">
-                <div class="form__button" (click)="move(3, 2);">Назад</div>
-                <div class="form__button" (click)="move(3, 5);">Далее</div>
-              </div>
-        </div>
-
-        <div class="tab" id = "tab-4">
-            <div class="form-inputs">    
-                <div class="form__div">
-                    <div class="form__icon">
-                        <i class='bx bxs-graduation'></i>
-                    </div>
-    
-                    <div class="form__div-input">
-                        <label for="" class="select__label">Должность</label>
-                        <select type="text" class="form__input select-field" [(ngModel)]="credentials.mentor.title">
-                            <option disabled selected>Укажите должность</option>
-                            <option>Профессор</option>
-                            <option>Доцент</option>
-                            <option>Ст. преподаватель</option>
-                            <option>Ассистент</option>
-                            <option>Другое</option>
-                    </select>
+                <div formGroupName="student">
+                    <div class="form__div form__div-one tab-hidden" #studentCourse>
+                        <div class="form__icon">
+                            <i class='bx bxs-graduation'></i>
+                        </div>
+                        <div formGroupName="course">
+                            <div class="form__div-input">
+                                <label for="" class="select__label">Курс</label>
+                                <select type="text" class="form__input select-field" 
+                                    formControlName="number"
+                                    (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                                    <option disabled selected>Укажите курс</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div formGroupName="mentor">
+                    <div class="form__div form__div-one tab-hidden" #mentorTitle>
+                        <div class="form__icon">
+                            <i class='bx bxs-graduation'></i>
+                        </div>
+        
+                        <div class="form__div-input">
+                            <label for="" class="select__label">Должность</label>
+                            <select type="text" class="form__input select-field" formControlName="title"
+                                (focus)="addFocus($event)" (blur)="removeFocus($event)">
+                                <option disabled selected>Укажите должность</option>
+                                <option>Профессор</option>
+                                <option>Доцент</option>
+                                <option>Ст. преподаватель</option>
+                                <option>Ассистент</option>
+                                <option>Другое</option>
+                        </select>
+                        </div>
+                </div>
+                </div>
             <div class="index-btn-wrapper">
-                <div class="form__button" (click)="move(4, 2);">Назад</div>
-                <div class="form__button" (click)="move(4, 5);">Далее</div>
-              </div>
+                <div class="form__button" (click)="move(2, 1);">Назад</div>
+                <div class="form__button" (click)="move(2, 3);">Далее</div>
+            </div>
         </div>
-
-        <div class="tab" id = "tab-5">
-            <div class="form-inputs">
+        <div class="tab tab-hidden" #tab>
                 <div class="form__div form__div-one">
                     <div class="form__icon">
                         <i class='bx bx-user-circle'></i>
@@ -145,11 +132,12 @@
     
                     <div class="form__div-input">
                         <label for="" class="form__label">Логин</label>
-                        <input type="text" class="form__input" [(ngModel)]="credentials.userName">
+                        <input type="text" class="form__input" formControlName="userName"
+                        (focus)="addFocus($event)" (blur)="removeFocus($event)">
                     </div>
                 </div>
     
-                <div class="form__div">
+                <div class="form__div form__div-one">
                     <div class="form__icon">
                         <i class='bx bx-lock' ></i>
                     </div>
@@ -157,11 +145,11 @@
                     <div class="form__div-input">
                         <label for="" class="form__label">Пароль</label>
                         <input type="password" class="form__input"
-                        [(ngModel)]="credentials.password"
+                        formControlName="password"
                         (focus)="addFocus($event)" (blur)="removeFocus($event)" >
                     </div>
                 </div>
-                <div class="form__div">
+                <div class="form__div form__div-one">
                     <div class="form__icon">
                         <i class='bx bx-lock' ></i>
                     </div>
@@ -169,17 +157,17 @@
                     <div class="form__div-input">
                         <label for="" class="form__label">Подтвердить пароль</label>
                         <input type="password" class="form__input"
-                        [(ngModel)]="credentials.confirmPassword"
+                        formControlName="confirmPassword"
                         (focus)="addFocus($event)" (blur)="removeFocus($event)" >
                     </div>
                 </div>
-            </div>
             <div class="index-btn-wrapper">
-              <div class="form__button" (click)="move(5, 3);">Назад</div>
+              <div class="form__button" (click)="move(3, 2);">Назад</div>
               
-              <button class="form__button" type="submit" [disabled]="" 
+              <button class="form__button" type="submit" [disabled]="!credentials.valid"
                 (click)="register()">Завершить</button>
             </div>
-          </div>    
-    </form>
+        </div>
+        </form>
+    </div>
 </div>
