@@ -4,6 +4,7 @@ using KMaSA.Infrastructure.EF;
 using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.CourseWorks;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ public class CourseWorksRepository : ICourseWorksRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<CourseWorkDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<GetCourseWorkDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -44,13 +45,13 @@ public class CourseWorksRepository : ICourseWorksRepository
             .Include(cw => cw.Mentor)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<CourseWorkDto>
+        return new PagedModel<GetCourseWorkDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<CourseWorkDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<GetCourseWorkDto>>(entityPagedModel.Items),
         };
     }
 
@@ -58,7 +59,7 @@ public class CourseWorksRepository : ICourseWorksRepository
     /// <exception cref="ArgumentOutOfRangeException">
     /// Throws, if the limit is less than zero or mentor's id is negative or zero.
     /// </exception>
-    public async Task<PagedModel<CourseWorkDto>> GetByMentorAsync(int mentorId, int page, int limit)
+    public async Task<PagedModel<GetCourseWorkDto>> GetByMentorAsync(int mentorId, int page, int limit)
     {
         if (mentorId < 1)
         {
@@ -76,20 +77,20 @@ public class CourseWorksRepository : ICourseWorksRepository
             .Where(cw => cw.Mentor.Id == mentorId)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<CourseWorkDto>
+        return new PagedModel<GetCourseWorkDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<CourseWorkDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<GetCourseWorkDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
     /// <exception cref="ArgumentException">Throws, if the title is null or empty or whitespace.</exception>
-    public async Task<PagedModel<CourseWorkDto>> GetByTitleAsync(string title, int page, int limit)
+    public async Task<PagedModel<GetCourseWorkDto>> GetByTitleAsync(string title, int page, int limit)
     {
         if (string.IsNullOrWhiteSpace(title))
         {
@@ -107,19 +108,19 @@ public class CourseWorksRepository : ICourseWorksRepository
             .Where(cw => cw.Title == title)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<CourseWorkDto>
+        return new PagedModel<GetCourseWorkDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<CourseWorkDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<GetCourseWorkDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<CourseWorkDto>> GetByStatusAsync(CourseWorkStatus status, int page, int limit)
+    public async Task<PagedModel<GetCourseWorkDto>> GetByStatusAsync(CourseWorkStatus status, int page, int limit)
     {
         if (limit < 0)
         {
@@ -132,19 +133,19 @@ public class CourseWorksRepository : ICourseWorksRepository
             .Where(cw => cw.Status == (CourseWorkStatus)(int)status)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<CourseWorkDto>
+        return new PagedModel<GetCourseWorkDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<CourseWorkDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<CourseWorkEntity>, IEnumerable<GetCourseWorkDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the course work's id is less than zero.</exception>
-    public async Task<CourseWorkDto> GetByIdAsync(int id)
+    public async Task<GetCourseWorkDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
@@ -157,12 +158,12 @@ public class CourseWorksRepository : ICourseWorksRepository
             .Include(cw => cw.Student)
             .SingleOrDefaultAsync(cw => cw.Id == id);
 
-        return this.autoMapper.Map<CourseWorkDto>(entity);
+        return this.autoMapper.Map<GetCourseWorkDto>(entity);
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
-    public async Task<int> AddAsync(CourseWorkDto courseWorkDto)
+    public async Task<int> AddAsync(AddCourseWorkDto courseWorkDto)
     {
         if (courseWorkDto is null)
         {
@@ -179,7 +180,7 @@ public class CourseWorksRepository : ICourseWorksRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the course work's id is less than zero.</exception>
-    public async Task<bool> UpdateAsync(int courseWorkId, CourseWorkDto courseWorkDto)
+    public async Task<bool> UpdateAsync(int courseWorkId, AddCourseWorkDto courseWorkDto)
     {
         if (courseWorkId < 1)
         {

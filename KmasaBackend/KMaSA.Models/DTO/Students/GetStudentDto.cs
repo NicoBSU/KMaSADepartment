@@ -1,4 +1,6 @@
-﻿namespace KMaSA.Models.DTO.Students
+﻿using KMaSA.Models.DTO.CourseWorks;
+
+namespace KMaSA.Models.DTO.Students
 {
     public class GetStudentDto
     {
@@ -12,7 +14,7 @@
 
         public CourseDto Course { get; set; }
 
-        public CourseWorkDto CourseWork { get; set; }
+        public GetCourseWorkDto CourseWork { get; set; }
 
         public ICollection<SubjectDto> Subjects { get; set; }
     }
