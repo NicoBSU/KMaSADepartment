@@ -1,4 +1,5 @@
-﻿using BLInterfaces.Interfaces;
+﻿using System.Text.Json.Serialization;
+using BLInterfaces.Interfaces;
 using Core.API.Extensions;
 using Core.API.Infrastructure;
 using DAInterfaces.Repositories;
@@ -24,12 +25,20 @@ namespace Core.API
             services.AddDbContext<KmasaContext>(
                 options => options.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddEndpointsApiExplorer();
             services.AddIdentityServices(_config);
             services.AddSwaggerGen();
-            services.AddCors();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             services.AddAutoMapper(typeof(KmasaMappingProfile).Assembly);
 
             //services
@@ -69,12 +78,7 @@ namespace Core.API
 
             app.UseRouting();
 
-            app.UseCors(x => x
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()
-                .WithOrigins("https://localhost:4200"));
-
+            app.UseCors("EnableCORS");
             app.UseAuthentication();
 
             app.UseAuthorization();

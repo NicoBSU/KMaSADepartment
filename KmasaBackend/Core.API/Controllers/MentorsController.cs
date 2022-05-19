@@ -29,7 +29,7 @@ namespace Core.API.Controllers
         /// <summary>
         /// Get All Mentors
         /// </summary>
-        [HttpGet("allMentors")]
+        [HttpGet("{currentPage}/{pageSize}")]
         public async Task<ActionResult<PagedModel<GetMentorDto>>> GetAllMentors(int currentPage, int pageSize)
         {
             var mentorsList = await _mentorsService.GetAllMentors(currentPage, pageSize);
@@ -44,21 +44,21 @@ namespace Core.API.Controllers
         /// <summary>
         /// Get mentor by id
         /// </summary>
-        [HttpGet("mentor/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<GetMentorDto>> GetMentorById(int id)
         {
             var mentor = await _mentorsService.GetMentorById(id);
-            
+
             var userEntity = await _userManager.FindByIdAsync(mentor.UserId.ToString());
             mentor.User = _mapper.Map<UserDto>(userEntity);
-            
+
             return mentor;
         }
 
         /// <summary>
         /// Update Mentor
         /// </summary>
-        [HttpPut("updateMentor/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateMentor(int id, UpdateMentorDto dto)
         {
             var result = await _mentorsService.UpdateMentor(id, dto);
