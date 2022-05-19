@@ -16,5 +16,6 @@ namespace BLInterfaces.Interfaces
         Task<bool> UpdateCourseWorkStatus(CourseWorkStatus status, int id);
         Task<bool> DeleteCourseWork(int id);
         Task<bool> BindStudent(int studentId, int courseWorkId);
+        Task<bool> UnbindStudent(int courseWorkId);
     }
 }

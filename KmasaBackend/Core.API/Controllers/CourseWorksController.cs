@@ -122,16 +122,18 @@ namespace Core.API.Controllers
         {
             var result = await _courseWorksService.BindStudent(studentId, id);
             if (result) return Ok();
-            return BadRequest("Failed to delete coursework status");
+            return BadRequest("Failed to bind student");
         }
 
         /// <summary>
         /// unbind student from coursework
         /// </summary>
         [HttpPut("unbindStudent/{id}")]
-        public async Task<ActionResult> UnbindStudent(int currentPage, int pageSize)
+        public async Task<ActionResult> UnbindStudent(int id)
         {
-            return Ok();
+            var result = await _courseWorksService.UnbindStudent(id);
+            if (result) return Ok();
+            return BadRequest("Failed to unbind student");
         }
     }
 }
