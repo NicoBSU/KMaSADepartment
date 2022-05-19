@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using BLInterfaces.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Core.API.Controllers
 {
@@ -6,6 +8,15 @@ namespace Core.API.Controllers
     [ApiController]
     public class CourseWorksController : ControllerBase
     {
+        private readonly ICourseWorksService _courseWorksService;
+        private readonly IMapper _mapper;
+
+        public CourseWorksController(ICourseWorksService courseWorksService,
+            IMapper mapper)
+        {
+            _courseWorksService = courseWorksService;
+            _mapper = mapper;
+        }
 
         /// <summary>
         /// Get All CourseWorks
@@ -13,7 +24,8 @@ namespace Core.API.Controllers
         [HttpGet("allCourseWorks")]
         public async Task<ActionResult> GetAllCourseWorks(int currentPage, int pageSize)
         {
-            return Ok();
+            var result = await _courseWorksService.GetAllCourseWorks(currentPage, pageSize);
+            return Ok(result);
         }
 
         /// <summary>

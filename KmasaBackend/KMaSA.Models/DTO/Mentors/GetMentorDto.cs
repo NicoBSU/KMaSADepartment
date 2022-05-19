@@ -1,4 +1,6 @@
-﻿namespace KMaSA.Models.DTO.Mentors
+﻿using KMaSA.Models.DTO.CourseWorks;
+
+namespace KMaSA.Models.DTO.Mentors
 {
     public class GetMentorDto
     {
@@ -12,7 +14,7 @@
 
         public string? Biography { get; set; }
 
-        public ICollection<CourseWorkDto> CourseWorks { get; set; }
+        public ICollection<GetCourseWorkDto> CourseWorks { get; set; }
 
         public ICollection<SubjectDto> Subjects { get; set; }
 

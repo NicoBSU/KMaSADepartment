@@ -1,9 +1,9 @@
 ﻿using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Enums;
 
-namespace KMaSA.Models.DTO;
+namespace KMaSA.Models.DTO.CourseWorks;
 
-public class CourseWorkDto : IDto
+public class GetCourseWorkDto : IDto
 {
     public int Id { get; set; }
 
