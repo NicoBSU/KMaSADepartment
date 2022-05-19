@@ -1,8 +1,8 @@
 ﻿using KMaSA.Models.DTO.Account;
 
-namespace KMaSA.Models.DTO;
+namespace KMaSA.Models.DTO.StudyResources;
 
-public class StudyResourceDto : IDto
+public class AddStudyResourceDto : IDto
 {
     public int Id { get; set; }
 
