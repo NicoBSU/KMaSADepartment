@@ -63,33 +63,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           url: new FormControl("")
           })
       }),
-      userType: new FormControl("Укажите статус", [Validators.required]),
-      mentor: this.formBuilder.group({
-        biography: new FormControl(""),
-        title: new FormControl("Укажите должность"),
-      }),
-      student: this.formBuilder.group({
-        course: this.formBuilder.group({
-          id: new FormControl(0),
-          number: new FormControl("Укажите курс")
-          })
-      }),
     });
-
-    this.onChanges();
   }
-
-  onChanges(): void {
-    this.credentials.get('userType')?.valueChanges.subscribe(val => {
-      if(val === 'Студент'){
-        this.studentCourse.nativeElement.classList.remove('tab-hidden');
-        this.mentorTitle.nativeElement.classList.add('tab-hidden');
-      } else if(val === 'Преподаватель'){
-        this.mentorTitle.nativeElement.classList.remove('tab-hidden');
-        this.studentCourse.nativeElement.classList.add('tab-hidden');
-      }
-    });
-  }  
 
   register(): void{
     this.submitted = true;

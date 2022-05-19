@@ -3,6 +3,7 @@ using BLInterfaces.Interfaces;
 using KMaSA.Models.DTO.Account;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -47,45 +48,31 @@ namespace Core.API.Controllers
         {
             if (await UserExists(registerDto.UserName)) return BadRequest("Username is taken!");
             if (registerDto.Password != registerDto.ConfirmPassword) return BadRequest("Password and confirm password are not equal!");
-            
-            UserEntity user = await _userService.AddUser(registerDto, UserType.Mentor);
+
+            registerDto.User.UserType = UserType.Student;
+
+            var user = await _userService.AddUser(registerDto);
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if (!result.Succeeded) return BadRequest(result.Errors);
-            int userId = user.Id;
 
-            if (registerDto.UserType == UserType.Mentor)
+            if (!result.Succeeded)
             {
-                if (registerDto.Mentor is null || registerDto.Student is not null) return BadRequest("Wrong type of user data entered, or correct one is null");
-                await _mentorService.AddMentor(registerDto.Mentor, userId);
+                return BadRequest(result.Errors);
             }
 
-            if (registerDto.UserType == UserType.Student)
-            {
-                if (registerDto.Student is null || registerDto.Mentor is not null) return BadRequest("Wrong type of user data entered, or correct one is null");
-                await _studentService.AddStudent(registerDto.Student,userId);
-            }
+            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "Student");
 
-            IdentityResult roleResult = null;
-
-            if (registerDto.UserType == UserType.Mentor)
+            if (!roleResult.Succeeded)
             {
-                roleResult = await _userManager.AddToRoleAsync(user, "Mentor");
+                return BadRequest(result.Errors);
             }
-
-            if (registerDto.UserType == UserType.Student)
-            {
-                roleResult = await _userManager.AddToRoleAsync(user, "Student");
-            }
-            
-            if (!(roleResult?.Succeeded) ?? true) return BadRequest(result.Errors);
 
             return new LoginSuccessDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user)
+                Token = await _tokenService.CreateTokenAsync(user),
+                UserRole = user?.UserRoles?.First()?.Role?.Name ?? "Student",
             };
         }
-
 
         /// <summary>
         /// Login a user
@@ -105,13 +92,73 @@ namespace Core.API.Controllers
             return new LoginSuccessDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateTokenAsync(user)
+                Token = await _tokenService.CreateTokenAsync(user),
+                UserRole = user?.UserRoles?.First()?.Role?.Name ?? "Student",
             };
+        }
+
+        [HttpPost("{userId}/approveMentor")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ApproveMentor(int userId, AddMentorDto mentor)
+        {
+            var user = await this.GetUser(userId);
+
+            if (user is null)
+            {
+                return this.BadRequest("User doesn't exist.");
+            }
+
+            user.UserType = UserType.Student;
+            var updateStatusResult = await this._userManager.UpdateAsync(user);
+
+            if (!updateStatusResult.Succeeded)
+            {
+                return this.BadRequest();
+            }
+
+            var removeRoleResult = await this._userManager.RemoveFromRoleAsync(user, "Student");
+
+            if (!removeRoleResult.Succeeded)
+            {
+                return this.BadRequest();
+            }
+
+            var roleResult = await this._userManager.AddToRoleAsync(user, "Mentor");
+
+            if (!roleResult.Succeeded)
+            {
+                return this.BadRequest();
+            }
+
+            var result = await this._mentorService.AddMentor(mentor, userId);
+
+            return this.Ok(result);
+        }
+
+        [HttpPost("{userId}/approveStudent")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ApproveStudent(int userId, AddStudentDto student)
+        {
+            var user = await this.GetUser(userId);
+
+            if (user is null)
+            {
+                return this.BadRequest("User doesn't exist.");
+            }
+
+            var result = await this._studentService.AddStudent(student, userId);
+
+            return this.Ok(result);
         }
 
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
+
+        private async Task<UserEntity> GetUser(int id)
+        {
+            return await this._userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }

@@ -12,19 +12,4 @@ export interface UserRegistrationDto {
             url?: string,
         }    
     };
-
-    userType: number;
-
-    mentor: {
-        title: string,
-        biography?: string
-    };
-
-    student:{
-        id: number,
-        course:{
-            id: number,
-            number: number,
-        }
-    }
 }

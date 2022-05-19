@@ -11,12 +11,5 @@ namespace KMaSA.Models.DTO.Account
         public string ConfirmPassword { get; set; }
 
         public UserDto User { get; set; }
-
-        public UserType UserType { get; set; }
-
-        public AddMentorDto? Mentor { get; set; } = null;
-
-        public AddStudentDto? Student { get; set; } = null;
-
     }
 }
