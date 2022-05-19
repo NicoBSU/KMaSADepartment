@@ -25,6 +25,7 @@ export class AuthenticationService {
   }
 
   register(userCredentials: UserRegistrationDto) {
+    console.log(userCredentials)
     return this.http.post<AuthUser>(`${environment.apiUrl}/account/register`, userCredentials)
     .pipe(map(user => {
       localStorage.setItem('user', JSON.stringify(user));
