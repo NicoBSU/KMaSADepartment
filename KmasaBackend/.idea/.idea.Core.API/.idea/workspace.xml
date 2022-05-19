@@ -26,7 +26,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d37a2c708281458196983e24436b1bfeafb16a3f0c6cc897c4176fcd59f07/NamingConventionsOptionsExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67ca338929a7480bb1afa3eac29fbf9d2b098/2e/1df30d50/UserManager`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4a2228b426c45beec31e8b2a1374b17586f7d225dd8dbd81ab9cf5a5e9461721/NamingConventionsExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d382df578ec93391918cfaa4ce7f4b8f35c9aed1241d6556dc9be26df13c/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -158,24 +160,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Core.API/Controllers/AccountController.cs</url>
-          <line>50</line>
-          <properties documentPath="D:\ASP.NET Core\KMaSA COURSE WORK\KMaSADepartment\KmasaBackend\Core.API\Controllers\AccountController.cs" initialLine="50" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="1865" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1940" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

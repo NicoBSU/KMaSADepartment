@@ -6,6 +6,6 @@ namespace BLInterfaces.Interfaces
 {
     public interface IUserService
     {
-        Task<UserEntity> AddUser(RegisterDto dto, UserType userType);
+        Task<UserEntity> AddUser(RegisterDto dto);
     }
 }

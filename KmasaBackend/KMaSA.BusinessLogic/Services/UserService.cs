@@ -20,7 +20,7 @@ namespace KMaSA.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<UserEntity> AddUser(RegisterDto registerDto, UserType userType)
+        public async Task<UserEntity> AddUser(RegisterDto registerDto)
         {
             var photo = _mapper.Map<PhotoEntity>(registerDto.User.Photo);
             UserEntity user = null;
