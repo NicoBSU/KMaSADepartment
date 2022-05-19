@@ -4,6 +4,7 @@ using KMaSA.Infrastructure.EF;
 using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.BlogArticles;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ public class BlogArticlesRepository : IBlogArticlesRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<BlogArticleDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<GetBlogArticleDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -41,34 +42,34 @@ public class BlogArticlesRepository : IBlogArticlesRepository
         var entityPagedModel = await this.dbContext.Blogs
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<BlogArticleDto>
+        return new PagedModel<GetBlogArticleDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<BlogArticleEntity>, IEnumerable<BlogArticleDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<BlogArticleEntity>, IEnumerable<GetBlogArticleDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the blog article's id is less than zero.</exception>
-    public async Task<BlogArticleDto> GetByIdAsync(int id)
+    public async Task<GetBlogArticleDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
             throw new ArgumentOutOfRangeException(nameof(id), "Article's identifier must be positive.");
         }
 
-        var entity = await this.dbContext.CourseWorks
+        var entity = await this.dbContext.Blogs
             .SingleOrDefaultAsync(ba => ba.Id == id);
 
-        return this.autoMapper.Map<BlogArticleDto>(entity);
+        return this.autoMapper.Map<GetBlogArticleDto>(entity);
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
-    public async Task<int> AddAsync(BlogArticleDto blogArticleDto)
+    public async Task<int> AddAsync(AddBlogArticleDto blogArticleDto)
     {
         if (blogArticleDto is null)
         {
@@ -85,7 +86,7 @@ public class BlogArticlesRepository : IBlogArticlesRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the blog article's id is less than zero.</exception>
-    public async Task<bool> UpdateAsync(int blogArticleId, BlogArticleDto blogArticleDto)
+    public async Task<bool> UpdateAsync(int blogArticleId, AddBlogArticleDto blogArticleDto)
     {
         if (blogArticleId < 1)
         {
@@ -122,7 +123,7 @@ public class BlogArticlesRepository : IBlogArticlesRepository
             throw new ArgumentOutOfRangeException(nameof(blogArticleId), "Article's identifier must be positive.");
         }
 
-        var article = await this.dbContext.CourseWorks
+        var article = await this.dbContext.Blogs
             .SingleOrDefaultAsync(cw => cw.Id == blogArticleId);
 
         if (article is null)
@@ -130,7 +131,7 @@ public class BlogArticlesRepository : IBlogArticlesRepository
             return false;
         }
 
-        this.dbContext.CourseWorks.Remove(article);
+        this.dbContext.Blogs.Remove(article);
         await this.dbContext.SaveChangesAsync();
 
         return true;
@@ -139,14 +140,14 @@ public class BlogArticlesRepository : IBlogArticlesRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the blog article's id is less than zero.</exception>
     /// <exception cref="ArgumentException">Throws, picture link is null or empty or whitespace.</exception>
-    public async Task<bool> UpdatePicture(int blogArticleId, string pictureLink)
+    public async Task<bool> UpdatePicture(int blogArticleId, PhotoDto picture)
     {
         if (blogArticleId < 1)
         {
             throw new ArgumentOutOfRangeException(nameof(blogArticleId), "Article's identifier must be positive.");
         }
 
-        if (string.IsNullOrWhiteSpace(pictureLink))
+        if (string.IsNullOrWhiteSpace(picture.Url))
         {
             throw new ArgumentException("Picture link is null or empty or whitespace.");
         }
@@ -159,7 +160,7 @@ public class BlogArticlesRepository : IBlogArticlesRepository
             return false;
         }
 
-        entity.PicturesLinks = pictureLink;
+        entity.PicturesLinks = picture.Url;
 
         await this.dbContext.SaveChangesAsync();
 
