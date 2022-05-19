@@ -136,6 +136,111 @@ img{
     margin-right: var(--mb-2);
 }
 
+.home{
+    height: calc(100vh - 3rem);
+    row-gap: 1rem;
+}
+
+.home-data{
+  align-self: center;
+}
+
+.home-title{
+  font-size: var(--big-font-size);
+  margin-bottom: var(--mb-5);
+}
+
+.home-title-color{
+  color: var(--first-color);
+}
+
+.home-social{
+  display: flex;
+  flex-direction: column;
+}
+
+.home-social-icon{
+  width: max-content;
+  margin-bottom: var(--mb-2);
+  font-size: 1.5rem;
+  color: var(--second-color);
+}
+
+.home-social-icon:hover{
+  color: var(--first-color);
+}
+
+.button{
+  display: inline-block;
+  background-color: var(--first-color);
+  color: #fff;
+  padding: .75rem 2.5rem;
+  font-weight: var(--font-semi);
+  border-radius: .5rem;
+}
+
+.button:hover{
+  box-shadow: 0 10px 36px rgba(0,0,0,.15);
+}
+
+.home-img{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 295px;
+}
+
+.pagination-link {
+    background-color:#fff;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    color: black;
+    float: left;
+    padding: 0.7rem 1.2rem;
+    margin: 0 4px;
+    text-decoration: none;
+    border-radius: .4rem;
+  }
+  
+  
+  .pagination-link.active {
+    background-color:var(--first-color);
+    color: #fff;
+  }
+  
+  .pagination-link:hover:not(.active) {
+    background-color: #555;
+    color: #fff;
+  } 
+
+@media screen and (max-width: 320px) {
+    .home {
+      row-gap: 2rem;
+    }
+    .home-img {
+      width: 200px;
+    }
+  }
+  
+  @media screen and (min-width: 576px) {
+    .home {
+        padding: 4rem 0 2rem;
+      }
+      .home-social {
+        padding-top: 0;
+        padding-bottom: 2.5rem;
+        flex-direction: row;
+        align-self: flex-end;
+      }
+      .home-social-icon {
+        margin-bottom: 0;
+        margin-right: var(--mb-4);
+      }
+      .home-img {
+        width: 300px;
+        bottom: 25%;
+      }
+  }
+
 @media screen and (min-width: 768px) {
     body {
       margin: 0;
@@ -151,11 +256,24 @@ img{
       width: 80px;
       top: 3rem;
     }
+    .home {
+        padding: 0 0 2rem;
+      }
+    .home-img {
+        width: 400px;
+        bottom: 10%;
+    }
 }  
 
 @media screen and (min-width: 992px) {
     .bd-grid {
       margin-left: auto;
       margin-right: auto;
+    }
+    .home {
+        padding: 10rem 0 2rem;
+      }
+    .home-img {
+        width: 450px;
     }
 }

@@ -1,0 +1,51 @@
+<main class="l-main">
+    <section class="home mentors-home bd-grid" id="home">
+        <div class="home-data">
+            <h1 class="home-title">
+                <span class="home-title-color">СОТРУДНИКИ СПЕЦИАЛЬНОСТИ</span>
+            </h1>
+            <a href="#" class="button">О специальности</a>
+        </div>
+
+        <div class="home-social mentors-social">
+            <a href="https://mmf.bsu.by/ru/" class="home-social-icon"><i class='bx bxs-institution'></i></a>
+            <a href="https://mmf.bsu.by/ru/specialities/computer-mathematics-and-systems-analysis/" class="home-social-icon"><i class='bx bx-info-circle'></i></a>
+        </div>
+    </section>
+
+    <section class="mentors section" id="mentors">
+
+        <div class="mentors-filtration">
+            <div class="box">
+                <select>
+                    <option>Все</option>
+                    <option>Профессоры</option>
+                    <option>Доценты</option>
+                    <option>Ст. преподаватели</option>
+                    <option>Ассистенты</option>
+                </select>
+              </div> 
+              <div class="pagination">
+                  <a routerLink="['mentors', '{{a}}', '{{mentorsPagedModel.totalPages}}']" class="pagination-link" routerLinkActive="active"
+                    *ngFor="let a of rangeLinks()">{{a}}</a>
+              </div>   
+        </div>              
+          
+        <div class="mentors-container bd-grid">
+            <div class="mentor-card" *ngFor="let mentor of mentorsPagedModel.items">
+                <img src="{{mentor.user.photo.url}}" alt="mentor" class="mentor-img">
+                <div class="mentor-data">
+                    <h3 class="mentor-name">{{mentor.user.firstName}} {{mentor.user.lastName}}<br>
+                        <span class="mentor-profession">{{mentor.title}}</span>
+                    </h3>
+                    <div class="mentor-stat">
+                        <h3>{{mentor.courseWorks.length}}<br><span>Курсовые работы</span></h3>
+                        <h3>{{mentor.publications.length}}<br><span>Публикации</span></h3>
+                    </div>
+                </div>
+                <a routerLink="['mentors','{{mentor.id}}']" class="mentor-button button">Подробнее</a>
+            </div>
+        </div>
+    </section>
+
+</main>

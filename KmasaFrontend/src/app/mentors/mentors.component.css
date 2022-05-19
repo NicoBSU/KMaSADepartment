@@ -1,0 +1,143 @@
+
+/* MENTORS PAGE */
+.mentors-home{
+    height: calc(80vh - 3rem);
+  }
+  
+.mentors-container{
+    gap: 1.5rem;
+  }
+  .mentor-card{
+    position: relative;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 25px rgba(14, 36, 49, .15);
+  }
+  
+  .mentor-img{
+    margin: auto;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+  }
+  .mentor-data{
+    padding: 1.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  .mentor-name{
+    font-size: 1.5em;
+    color: #555;
+    line-height: 1.2em;
+  }
+  .mentor-profession{
+    font-size: 0.7em;
+    opacity: 0.5;
+  }
+  .mentor-stat{
+    padding-top: .51rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+    overflow: hidden;
+  }
+  
+  .mentor-stat h3{
+    font-size: 1em;
+    color: #555;
+    line-height: 1.2em;
+    }
+  .mentor-stat h3 span{
+      font-size: .85em;
+      opacity: .5;
+    }
+    
+  .mentor-button{
+      gap: 1rem;
+      overflow: hidden;
+    }
+  .mentors-filtration{
+    max-width: 1024px;
+    width: calc(100% - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--mb-2);
+    margin-bottom: var(--mb-4);
+  }
+  .mentors-social{
+    display: flex;
+    flex-direction: row;
+  }
+  .mentors-social .home-social-icon{
+    margin-right: var(--mb-4);
+  }
+  
+  @media screen and (min-width: 992px) {
+    .mentor-card{
+      overflow: hidden;
+      height: 270px;
+      padding: 1.5rem;
+      transition: 0.4s;
+    }  
+    
+    .mentor-card:hover{
+      height: 450px;
+    }
+  
+    .mentors-social{
+      margin-top: 2rem;
+    }
+  }
+  
+  .box {
+    position: relative;
+    font-size: var(--h2-font-size);
+    color: var(--first-color);
+  }
+  
+  .box select {
+    background-color: #fff;
+    color: var(--first-color);
+    padding: 0.8rem;
+    border-radius: 1rem;
+    width: 250px;
+    border: none;
+    font-size: 1.25rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+  
+  .box select option {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+  
+  @media screen and (max-width: 460px) {
+    .mentors-filtration{
+      flex-direction: column;
+      align-items: center;
+      margin-top: auto;
+    }
+  
+    .pagination{
+      margin-top: 2rem;
+    }
+    .box select{
+      max-width: 250px;
+      width: fit-content;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .mentors-container{
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 3rem;
+      }
+  }
