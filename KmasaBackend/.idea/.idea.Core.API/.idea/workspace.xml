@@ -109,6 +109,12 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Core.API" />
+      <item itemvalue=".NET Launch Settings Profile.Core.API: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.Core.FrontEnd" />
+      <item itemvalue=".NET Launch Settings Profile.Core.FrontEnd: IIS Express" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -152,5 +158,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Core.API/Controllers/AccountController.cs</url>
+          <line>50</line>
+          <properties documentPath="D:\ASP.NET Core\KMaSA COURSE WORK\KMaSADepartment\KmasaBackend\Core.API\Controllers\AccountController.cs" initialLine="50" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="1865" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1940" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
