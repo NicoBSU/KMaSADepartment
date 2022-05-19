@@ -1,4 +1,5 @@
 ﻿using KMaSA.Models.DTO.CourseWorks;
+using KMaSA.Models.DTO.StudyResources;
 
 namespace KMaSA.Models.DTO.Mentors
 {
@@ -18,6 +19,6 @@ namespace KMaSA.Models.DTO.Mentors
 
         public ICollection<SubjectDto> Subjects { get; set; }
 
-        public ICollection<StudyResourceDto> Publications { get; set; }
+        public ICollection<GetStudyResourceDto> Publications { get; set; }
     }
 }
