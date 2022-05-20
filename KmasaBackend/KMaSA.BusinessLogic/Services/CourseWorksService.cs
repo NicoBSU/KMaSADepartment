@@ -76,5 +76,11 @@ namespace KMaSA.BusinessLogic.Services
             var result = await _courseWorksRepository.BindStudent(studentId, courseWorkId);
             return result;
         }
+
+        public async Task<bool> UnbindStudent(int courseWorkId)
+        {
+            var result = await _courseWorksRepository.UnbindStudent(courseWorkId);
+            return result;
+        }
     }
 }

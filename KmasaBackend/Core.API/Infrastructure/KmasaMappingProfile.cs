@@ -5,6 +5,8 @@ using KMaSA.Models.DTO.BlogArticles;
 using KMaSA.Models.DTO.CourseWorks;
 using KMaSA.Models.DTO.Mentors;
 using KMaSA.Models.DTO.Students;
+using KMaSA.Models.DTO.StudyResources;
+using KMaSA.Models.DTO.Subjects;
 using KMaSA.Models.Entities;
 using KMaSA.Models.Enums;
 
@@ -30,8 +32,16 @@ public sealed class KmasaMappingProfile : Profile
 
         this.CreateMap<CourseDto, CourseEntity>().ReverseMap();
         this.CreateMap<UserDto, UserEntity>().ReverseMap();
-        this.CreateMap<StudyResourceDto, StudyResourceEntity>().ReverseMap();
-        this.CreateMap<SubjectDto, SubjectEntity>().ReverseMap();
+
+        //study resource
+        this.CreateMap<GetStudyResourceDto, StudyResourceEntity>().ReverseMap();
+        this.CreateMap<AddStudyResourceDto, StudyResourceEntity>().ReverseMap();
+
+        //subjects
+        this.CreateMap<GetSubjectDto, SubjectEntity>().ReverseMap();
+        this.CreateMap<AddSubjectDto, SubjectEntity>().ReverseMap();
+
+        //photos
         this.CreateMap<PhotoDto, PhotoEntity>().ReverseMap();
 
 

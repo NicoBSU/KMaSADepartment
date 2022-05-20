@@ -3,7 +3,7 @@ using DAInterfaces.Repositories;
 using KMaSA.Infrastructure.EF;
 using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
-using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.StudyResources;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +31,7 @@ public class StudyResourceRepository : IStudyResourcesRepository
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the limit is less than zero.</exception>
-    public async Task<PagedModel<StudyResourceDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<GetStudyResourceDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -42,13 +42,13 @@ public class StudyResourceRepository : IStudyResourcesRepository
             .Include(sr => sr.TaggedMentors)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<StudyResourceDto>
+        return new PagedModel<GetStudyResourceDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<StudyResourceDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<GetStudyResourceDto>>(entityPagedModel.Items),
         };
     }
 
@@ -56,7 +56,7 @@ public class StudyResourceRepository : IStudyResourcesRepository
     /// <exception cref="ArgumentOutOfRangeException">
     /// Throws, if the limit is less than zero or mentor's id is negative or zero.
     /// </exception>
-    public async Task<PagedModel<StudyResourceDto>> GetByMentorAsync(int mentorId, int page, int limit)
+    public async Task<PagedModel<GetStudyResourceDto>> GetByMentorAsync(int mentorId, int page, int limit)
     {
         if (mentorId < 1)
         {
@@ -76,13 +76,13 @@ public class StudyResourceRepository : IStudyResourcesRepository
             .Where(cr => cr.TaggedMentors.Contains(mentor))
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<StudyResourceDto>
+        return new PagedModel<GetStudyResourceDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<StudyResourceDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<GetStudyResourceDto>>(entityPagedModel.Items),
         };
     }
 
@@ -90,7 +90,7 @@ public class StudyResourceRepository : IStudyResourcesRepository
     /// <exception cref="ArgumentOutOfRangeException">
     /// Throws, if the limit is less than zero or subject's id is negative or zero.
     /// </exception>
-    public async Task<PagedModel<StudyResourceDto>> GetBySubjectAsync(int subjectId, int page, int limit)
+    public async Task<PagedModel<GetStudyResourceDto>> GetBySubjectAsync(int subjectId, int page, int limit)
     {
         if (subjectId < 1)
         {
@@ -111,19 +111,19 @@ public class StudyResourceRepository : IStudyResourcesRepository
             .Where(cr => cr.Subjects.Contains(subject))
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<StudyResourceDto>
+        return new PagedModel<GetStudyResourceDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<StudyResourceDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<StudyResourceEntity>, IEnumerable<GetStudyResourceDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the study resource's id is less than zero.</exception>
-    public async Task<StudyResourceDto> GetByIdAsync(int id)
+    public async Task<GetStudyResourceDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
@@ -135,12 +135,12 @@ public class StudyResourceRepository : IStudyResourcesRepository
             .Include(sr => sr.TaggedMentors)
             .SingleOrDefaultAsync(sr => sr.Id == id);
 
-        return this.autoMapper.Map<StudyResourceDto>(entity);
+        return this.autoMapper.Map<GetStudyResourceDto>(entity);
     }
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
-    public async Task<int> AddAsync(StudyResourceDto studyResourceDto)
+    public async Task<int> AddAsync(AddStudyResourceDto studyResourceDto)
     {
         if (studyResourceDto is null)
         {
@@ -157,7 +157,7 @@ public class StudyResourceRepository : IStudyResourcesRepository
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">Throws, if the dto is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Throws, if the study resource's id is less than zero.</exception>
-    public async Task<bool> UpdateAsync(int studyResourceId, StudyResourceDto studyResourceDto)
+    public async Task<bool> UpdateAsync(int studyResourceId, AddStudyResourceDto studyResourceDto)
     {
         if (studyResourceId < 1)
         {
@@ -238,7 +238,7 @@ public class StudyResourceRepository : IStudyResourcesRepository
         return true;
     }
 
-    private static void Update(StudyResourceEntity entity, StudyResourceDto studyResourceDto)
+    private static void Update(StudyResourceEntity entity, AddStudyResourceDto studyResourceDto)
     {
         entity.Name = studyResourceDto.Name;
         entity.Link = studyResourceDto.Link;

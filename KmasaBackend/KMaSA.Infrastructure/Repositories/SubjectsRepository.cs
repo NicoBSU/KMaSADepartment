@@ -4,6 +4,7 @@ using KMaSA.Infrastructure.EF;
 using KMaSA.Infrastructure.Extensions;
 using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Subjects;
 using KMaSA.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +31,7 @@ public class SubjectsRepository : ISubjectsRepository
     }
 
     /// <inheritdoc/>
-    public async Task<PagedModel<SubjectDto>> GetAsync(int page, int limit)
+    public async Task<PagedModel<GetSubjectDto>> GetAsync(int page, int limit)
     {
         if (limit < 0)
         {
@@ -41,18 +42,18 @@ public class SubjectsRepository : ISubjectsRepository
             .Include(s => s.Mentors)
             .PaginateAsync(page, limit, new CancellationToken());
 
-        return new PagedModel<SubjectDto>
+        return new PagedModel<GetSubjectDto>
         {
             PageSize = entityPagedModel.PageSize,
             CurrentPage = entityPagedModel.CurrentPage,
             TotalCount = entityPagedModel.TotalCount,
             Items = this.autoMapper
-                .Map<IEnumerable<SubjectEntity>, IEnumerable<SubjectDto>>(entityPagedModel.Items),
+                .Map<IEnumerable<SubjectEntity>, IEnumerable<GetSubjectDto>>(entityPagedModel.Items),
         };
     }
 
     /// <inheritdoc/>
-    public async Task<SubjectDto> GetByIdAsync(int id)
+    public async Task<GetSubjectDto> GetByIdAsync(int id)
     {
         if (id < 1)
         {
@@ -64,11 +65,11 @@ public class SubjectsRepository : ISubjectsRepository
             .Include(s => s.Literature)
             .SingleOrDefaultAsync(s => s.Id == id);
 
-        return this.autoMapper.Map<SubjectDto>(entity);
+        return this.autoMapper.Map<GetSubjectDto>(entity);
     }
 
     /// <inheritdoc/>
-    public async Task<int> AddAsync(SubjectDto subjectDto)
+    public async Task<int> AddAsync(AddSubjectDto subjectDto)
     {
         if (subjectDto is null)
         {
@@ -111,7 +112,7 @@ public class SubjectsRepository : ISubjectsRepository
     }
 
     /// <inheritdoc/>
-    public async Task<bool> UpdateAsync(int subjectId, SubjectDto subjectDto)
+    public async Task<bool> UpdateAsync(int subjectId, AddSubjectDto subjectDto)
     {
         if (subjectId < 1)
         {

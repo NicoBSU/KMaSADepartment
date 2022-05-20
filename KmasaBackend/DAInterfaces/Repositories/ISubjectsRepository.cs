@@ -1,5 +1,6 @@
 ﻿using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.Subjects;
 
 namespace DAInterfaces.Repositories;
 
@@ -14,21 +15,21 @@ public interface ISubjectsRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of subjects.</returns>
-    Task<PagedModel<SubjectDto>> GetAsync(int page, int limit);
+    Task<PagedModel<GetSubjectDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets subject by id.
     /// </summary>
     /// <param name="id">Subject's id.</param>
     /// <returns>Subject with specified id.</returns>
-    Task<SubjectDto> GetByIdAsync(int id);
+    Task<GetSubjectDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new subject.
     /// </summary>
     /// <param name="subjectDto">New subject.</param>
     /// <returns>Id of created subject.</returns>
-    Task<int> AddAsync(SubjectDto subjectDto);
+    Task<int> AddAsync(AddSubjectDto subjectDto);
 
     /// <summary>
     /// Adds mentor for subject.
@@ -44,7 +45,7 @@ public interface ISubjectsRepository
     /// <param name="subjectId">Id of the subject.</param>
     /// <param name="subjectDto">New values.</param>
     /// <returns>True, if subject was updated, otherwise, false.</returns>
-    Task<bool> UpdateAsync(int subjectId, SubjectDto subjectDto);
+    Task<bool> UpdateAsync(int subjectId, AddSubjectDto subjectDto);
 
     /// <summary>
     /// Removes subject.

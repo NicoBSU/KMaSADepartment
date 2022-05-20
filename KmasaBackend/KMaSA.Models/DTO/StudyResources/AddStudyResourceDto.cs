@@ -1,8 +1,9 @@
 ﻿using KMaSA.Models.DTO.Account;
+using KMaSA.Models.DTO.Subjects;
 
-namespace KMaSA.Models.DTO;
+namespace KMaSA.Models.DTO.StudyResources;
 
-public class StudyResourceDto : IDto
+public class AddStudyResourceDto : IDto
 {
     public int Id { get; set; }
 
@@ -10,7 +11,7 @@ public class StudyResourceDto : IDto
 
     public string Link { get; set; }
 
-    public ICollection<SubjectDto> Subjects { get; set; }
+    public ICollection<GetSubjectDto> Subjects { get; set; }
 
     public ICollection<AddMentorDto> TaggedMentors { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using KMaSA.Models;
 using KMaSA.Models.DTO;
+using KMaSA.Models.DTO.StudyResources;
 
 namespace DAInterfaces.Repositories;
 
@@ -14,7 +15,7 @@ public interface IStudyResourcesRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> GetAsync(int page, int limit);
+    Task<PagedModel<GetStudyResourceDto>> GetAsync(int page, int limit);
 
     /// <summary>
     /// Gets study resources with specified count by author.
@@ -23,7 +24,7 @@ public interface IStudyResourcesRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> GetByMentorAsync(int mentorId, int page, int limit);
+    Task<PagedModel<GetStudyResourceDto>> GetByMentorAsync(int mentorId, int page, int limit);
 
     /// <summary>
     /// Gets study resources with specified count by subject.
@@ -32,21 +33,21 @@ public interface IStudyResourcesRepository
     /// <param name="page">Page number.</param>
     /// <param name="limit">Count of items to take</param>
     /// <returns>Paged model with collection of study resources.</returns>
-    Task<PagedModel<StudyResourceDto>> GetBySubjectAsync(int subjectId, int page, int limit);
+    Task<PagedModel<GetStudyResourceDto>> GetBySubjectAsync(int subjectId, int page, int limit);
 
     /// <summary>
     /// Gets study resource by id.
     /// </summary>
     /// <param name="id">Study resource id.</param>
     /// <returns>Study resource with specified id.</returns>
-    Task<StudyResourceDto> GetByIdAsync(int id);
+    Task<GetStudyResourceDto> GetByIdAsync(int id);
 
     /// <summary>
     /// Adds new study resource.
     /// </summary>
     /// <param name="studyResourceDto">New study resource.</param>
     /// <returns>Id of the added study resource.</returns>
-    Task<int> AddAsync(StudyResourceDto studyResourceDto);
+    Task<int> AddAsync(AddStudyResourceDto studyResourceDto);
 
     /// <summary>
     /// Updates study resource.
@@ -54,7 +55,7 @@ public interface IStudyResourcesRepository
     /// <param name="studyResourceId">Study resource id.</param>
     /// <param name="studyResourceDto">New values.</param>
     /// <returns>True, if study resource was updated, otherwise, false.</returns>
-    Task<bool> UpdateAsync(int studyResourceId, StudyResourceDto studyResourceDto);
+    Task<bool> UpdateAsync(int studyResourceId, AddStudyResourceDto studyResourceDto);
 
     /// <summary>
     /// Removes study resource.
