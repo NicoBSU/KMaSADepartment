@@ -1,0 +1,218 @@
+
+/*===== ABOUT =====*/
+.about-container{
+  row-gap: 2rem;
+  text-align: center;
+}
+
+.about-subtitle{
+  margin-bottom: var(--mb-1);
+}
+
+.about-img{
+    justify-self: center;
+}
+
+.about-img img{
+  width: 250px;
+  border-radius: 0.5rem;
+}
+
+/*===== CONDITIONS ======*/
+.conditions-container{
+  row-gap: 2rem;
+  text-align: center;
+}
+
+.conditions-subtitle{
+  margin-bottom: var(--mb-1);
+}
+
+.conditions-text{
+  margin-bottom: var(--mb-4);
+}
+
+.conditions-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  font-weight: var(--font-semi);
+  padding: .5rem 1rem;
+  margin-bottom: var(--mb-4);
+  border-radius: .5rem;
+  box-shadow: 0 4px 25px rgba(14, 36, 49, .15);
+}
+.condition-icon{
+  font-size: 2rem;
+  margin-right: var(--mb-2);
+  color: var(--first-color);
+}
+
+.condition-names{
+  display: flex;
+  align-items: center;
+}
+
+.conditions-chart-wrapper{
+  border-radius: .5rem;
+  height: 200px;
+}
+
+/*===== EDUCATION =====*/
+.education-program-container{
+  row-gap: 2rem;
+  text-align: center;
+}
+
+.education-program-subtitle{
+  margin-bottom: var(--mb-1);
+}
+
+/*===== STUDENTS' FUTURE =====*/
+.future-data-container{
+  row-gap: 2rem;
+  text-align: center;
+}
+
+.future-subtitle{
+  margin-bottom: var(--mb-1);
+}
+
+.future-container{
+  margin-left: var(--mb-2);
+  margin-right: var(--mb-2);
+}
+.future-card{
+  position: relative;
+  border-radius: .4rem;
+  max-width: 250px;
+  overflow: var(--img-hidden);
+}
+.future-card-data{
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+}
+.future-card-title{
+  color: #fff;
+  font-size: var(--h3-font-size);
+  margin-bottom: .25rem;
+}
+.future-img{
+  transition: var(--img-transition);
+  -webkit-filter: brightness(60%);
+  filter: brightness(60%);  
+  width: 250px;
+  height: 170px;
+}
+.future-img:hover{
+  transform: var(--img-scale);
+}
+
+/*===== COOPERATION =====*/
+.cooperation-container{
+  row-gap: 2rem;
+  text-align: left;
+  padding-top: 1rem;
+}
+.cooperation-content{
+  box-shadow: 0 4px 25px rgba(14, 36, 49, .15);
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+}
+.cooperation-info-item{
+  display: flex;
+  column-gap: 1rem;
+  padding-top: 1rem;
+}
+.cooperation-title{
+  margin-top: var(--mb-2);
+  text-align: center;
+}
+.cooperation-icon{
+  color: var(--first-color);
+  margin-bottom: var(--mb-2);
+  font-size: 1.2rem;
+}
+  
+  @media screen and (min-width: 576px) {
+    .about-container {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      text-align: initial;
+    }
+    .conditions-container {
+      grid-template-columns: .7fr;
+      justify-content: center;
+      column-gap: 1rem;
+    }
+    .education-program-container {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      text-align: initial;
+    }
+    .future-container{
+      padding-top: 2rem;
+    }  
+    .cooperation-content{
+      padding: 2rem;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .about-container {
+      padding-top: 2rem;
+    }
+    .about-img img {
+      width: 450px;
+    }
+    .future-container{
+      width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }  
+  
+    .future-card{
+      position: relative;
+      max-width: 350px;
+    }
+    .future-card-data{
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1rem;
+    }
+    
+    .future-card-title{
+      color: #fff;
+      font-size: var(--h2-font-size);
+      margin-bottom: .25rem;
+    }
+    .future-img{
+      width: 350px;
+      height: 270px;
+    }
+  
+    .conditions-container {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+      align-items: center;
+      text-align: initial;
+    }
+    .conditions-chart-wrapper{
+      height: 300px;
+    }
+    .education-program-container {
+      padding-top: 2rem;
+    }
+    .cooperation-container{
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 3rem;
+    }
+  }
+  
+  @media screen and (min-width: 992px) {
+    .conditions-chart-wrapper{
+      height: 400px;
+    }
+  }

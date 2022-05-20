@@ -1,0 +1,52 @@
+<header class="l-header">
+    <nav class="nav bd-grid">
+        <div>
+            <a routerLink="/" class="nav-logo">КМиСА</a>
+        </div>
+        <div class="nav-menu" #navMenu>
+            <ul class="nav-list" #navList>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active"  
+                    [routerLinkActiveOptions]="{exact:true}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/mentors" routerLinkActive="active">Сотрудники</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/education" routerLinkActive="active">Образование</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/contacts" routerLinkActive="active">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="!isUserAuthenticated" class="nav-link"
+                        routerLink="/login" routerLinkActive="active">
+                        <i class='bx bx-user-circle profile-icon'></i>
+                    </a>
+
+                    <a class="nav-link">
+                        <i *ngIf="isUserAuthenticated" 
+                        class='bx bx-user-circle profile-icon' (click)="showProfileMenu()"></i>    
+                    </a>
+
+                    <div #profileNav ngClass="dd-menu" *ngIf="isUserAuthenticated" 
+                        class="dropdown-nav">
+                        <div class="dd-right">
+                            <ul>
+                                <li>Profile</li>
+                                <li>
+                                    <a class="nav-link pnl" (click)="logout()" routerLinkActive="active">Logout</a>
+                                </li>
+                            </ul>        
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-toggle" (click)="showMenu()" #navToggle>
+            <i class='bx bx-menu'></i>
+        </div>
+    </nav>
+</header>
+
