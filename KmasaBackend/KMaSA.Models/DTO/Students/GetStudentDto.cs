@@ -1,4 +1,5 @@
 ﻿using KMaSA.Models.DTO.CourseWorks;
+using KMaSA.Models.DTO.Subjects;
 
 namespace KMaSA.Models.DTO.Students
 {
@@ -16,6 +17,6 @@ namespace KMaSA.Models.DTO.Students
 
         public GetCourseWorkDto CourseWork { get; set; }
 
-        public ICollection<SubjectDto> Subjects { get; set; }
+        public ICollection<GetSubjectDto> Subjects { get; set; }
     }
 }

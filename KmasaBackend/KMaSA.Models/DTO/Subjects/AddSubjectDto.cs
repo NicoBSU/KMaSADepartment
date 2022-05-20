@@ -1,12 +1,10 @@
 ﻿using KMaSA.Models.DTO.Account;
 using KMaSA.Models.DTO.StudyResources;
 
-namespace KMaSA.Models.DTO;
+namespace KMaSA.Models.DTO.Subjects;
 
-public class SubjectDto : IDto
+public class AddSubjectDto
 {
-    public int Id { get; set; }
-
     public string Title { get; set; }
 
     public string Description { get; set; }
